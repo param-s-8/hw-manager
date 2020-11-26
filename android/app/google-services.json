@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "501129151290",
+    "firebase_url": "https://hw-manager-rpv.firebaseio.com",
+    "project_id": "hw-manager-rpv",
+    "storage_bucket": "hw-manager-rpv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501129151290:android:67b82a6e0e93d24df68603",
+        "android_client_info": {
+          "package_name": "param115.somaiya.hw_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501129151290-t11om6ottih4o631gp300nc7de5li049.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSymKG8OjbbLc0ZRHH3f76SIOfuqcnjUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501129151290-t11om6ottih4o631gp300nc7de5li049.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "501129151290-qhspdojhobmrqnkaktb6406b611oli76.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "param115.somaiya.hwManager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

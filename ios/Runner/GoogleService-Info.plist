@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>501129151290-qhspdojhobmrqnkaktb6406b611oli76.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.501129151290-qhspdojhobmrqnkaktb6406b611oli76</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCSEZcCrycZ7BM2d224LBRpu4u7iKoWv_E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>501129151290</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>param115.somaiya.hwManager</string>
+	<key>PROJECT_ID</key>
+	<string>hw-manager-rpv</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hw-manager-rpv.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:501129151290:ios:6e58b9e05267dfa3f68603</string>
+	<key>DATABASE_URL</key>
+	<string>https://hw-manager-rpv.firebaseio.com</string>
+</dict>
+</plist>
