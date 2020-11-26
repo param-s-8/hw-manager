@@ -1,6 +1,7 @@
 import 'mainPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'crud.dart';
 
@@ -18,10 +19,8 @@ class _RegisterState extends State<Register> {
   final TextEditingController _collegeController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
 
-  crudMethods crudObj = new crudMethods();
-  // ignore: unused_field
+
   bool _isSuccess;
-  // ignore: unused_field
   String _userEmail;
   @override
   void dispose() {
@@ -29,6 +28,8 @@ class _RegisterState extends State<Register> {
     _passwordController.dispose();
     super.dispose();
   }
+
+    crudMethods crudObj = new crudMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -130,11 +131,10 @@ class _RegisterState extends State<Register> {
       }
       await user.updateProfile(displayName: _displayName.text);
       final user1 = _auth.currentUser;
-      Map userData = {'Name': _displayName.text, 'Email': _emailController.text,'Password': _passwordController.text, 'College': _collegeController.text, 'Total Subjects': _subjectController.text};
-      crudObj.addUser(userData).then((result) {
-          print(context);
+      crudObj.addUser({'Name': _displayName.text, 'Email': _emailController.text,'Password': _passwordController.text, 'College': _collegeController.text, 'Total Subjects': _subjectController.text}).then((result) {
+          print("User Added");
       }).catchError((e) {
-        print(e);
+        print("Error: $e");
       });
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => MainPage(

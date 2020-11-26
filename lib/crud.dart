@@ -11,14 +11,20 @@ class crudMethods {
     }
   }
 
-  Future<void> addUser(userData) async {
-    if(isLoggedIn()) {
-      FirebaseFirestore.instance.collection('users').add(userData).catchError((e) {
+  Future<void> addUser(userData) {
+
+      return FirebaseFirestore.instance.collection('users').add(userData).then((value) {
+      print("User Added");
+      }).catchError((e) {
         print(e);
       });
-    } else {
-      print('You need to be logged in');
 
-    }
+    
+  }
+
+  updateData(sDoc, newValues) {
+    FirebaseFirestore.instance.collection('users').document(sDoc).updateData(newValues).catchError((e) {
+    print(e);
+    });
   }
 }
