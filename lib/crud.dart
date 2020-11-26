@@ -10,20 +10,15 @@ class crudMethods {
       return false;
     }
   }
-
   Future<void> addUser(userData) {
-
       return FirebaseFirestore.instance.collection('users').add(userData).then((value) {
       print("User Added");
       }).catchError((e) {
         print(e);
       });
-
-    
   }
-
   updateData(sDoc, newValues) {
-    FirebaseFirestore.instance.collection('users').document(sDoc).updateData(newValues).catchError((e) {
+    FirebaseFirestore.instance.collection('users').doc(sDoc).update(newValues).catchError((e) {
     print(e);
     });
   }

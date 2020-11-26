@@ -140,7 +140,6 @@ class _RegisterState extends State<Register> {
           builder: (context) => MainPage(
             user: user1,
           )));
-
     } else {
       _isSuccess = false;
     }
