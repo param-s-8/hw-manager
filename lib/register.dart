@@ -132,13 +132,14 @@ class _RegisterState extends State<Register> {
       final user1 = _auth.currentUser;
       Map userData = {'Name': _displayName.text, 'Email': _emailController.text,'Password': _passwordController.text, 'College': _collegeController.text, 'Total Subjects': _subjectController.text};
       crudObj.addUser(userData).then((result) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => MainPage(
-              user: user1,
-            )));
+          print(context);
       }).catchError((e) {
         print(e);
       });
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => MainPage(
+            user: user1,
+          )));
 
     } else {
       _isSuccess = false;

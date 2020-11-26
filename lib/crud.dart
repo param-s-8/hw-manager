@@ -13,7 +13,7 @@ class crudMethods {
 
   Future<void> addUser(userData) async {
     if(isLoggedIn()) {
-      Firestore.instance.collection('users').add(userData).catchError((e) {
+      FirebaseFirestore.instance.collection('users').add(userData).catchError((e) {
         print(e);
       });
     } else {
