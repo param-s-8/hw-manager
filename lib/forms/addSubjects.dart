@@ -1,20 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../screens/home.dart';
+import '../crud.dart';
 
-import 'mainPage.dart';
-
-class SignIn extends StatefulWidget {
+class addSubject extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _addSubjectState createState() => _addSubjectState();
 }
 
-class _SignInState extends State<SignIn> {
+crudMethods crudObj = new crudMethods();
+
+class _addSubjectState extends State<addSubject> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _subjectController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _professorController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +24,14 @@ class _SignInState extends State<SignIn> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            withEmailPassword(),
+            addSubjects(),
           ],
         );
       }),
     );
   }
 
-  Widget withEmailPassword() {
+  Widget addSubjects() {
     return Form(
         key: _formKey,
         child: Card(
@@ -41,36 +42,35 @@ class _SignInState extends State<SignIn> {
               children: <Widget>[
                 Container(
                   child: const Text(
-                    'Sign in with email and password',
+                    'Enter Subjects',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   alignment: Alignment.center,
                 ),
                 TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(labelText: 'Email'),
+                  controller: _subjectController,
+                  decoration: const InputDecoration(labelText: 'Subject'),
                   validator: (value) {
                     if (value.isEmpty) return 'Please enter some text';
                     return null;
                   },
                 ),
                 TextFormField(
-                  controller: _passwordController,
-                  decoration: const InputDecoration(labelText: 'Password'),
+                  controller: _professorController,
+                  decoration: const InputDecoration(labelText: 'Professor'),
                   validator: (value) {
                     if (value.isEmpty) return 'Please enter some text';
                     return null;
                   },
-                  obscureText: true,
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 16.0),
                   alignment: Alignment.center,
                   child: OutlineButton(
-                    child: Text("Sign In"),
+                    child: Text("Confirm"),
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        _signInWithEmailAndPassword();
+                        _addNewSubject();
                       }
                     },
                   ),
@@ -83,35 +83,28 @@ class _SignInState extends State<SignIn> {
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _subjectController.dispose();
+    _professorController.dispose();
     super.dispose();
   }
 
-  void _signInWithEmailAndPassword() async {
+  void _addNewSubject() async {
     try {
-      final User user = (await _auth.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ))
-          .user;
-      if (!user.emailVerified) {
-        await user.sendEmailVerification();
-      }
+      crudObj.addSubject({
+        'Subject': _subjectController.text,
+        'Professor': _professorController.text
+      }).then((result) {
+        print("Subject Added");
+      }).catchError((e) {
+        print("Error: $e");
+      });
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-        return MainPage(
-          user: user,
-        );
+        return HomePage();
       }));
     } catch (e) {
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Failed to sign in with Email & Password"),
+        content: Text("Failed to add subject"),
       ));
     }
-  }
-
-  // ignore: unused_element
-  void _signOut() async {
-    await _auth.signOut();
   }
 }

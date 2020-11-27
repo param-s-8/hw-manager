@@ -1,4 +1,4 @@
-import 'firebaseAuthDemo.dart';
+import 'auth/signIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FirebaseAuthDemo(),
+      home: SignIn(),
     );
   }
 }

@@ -1,9 +1,8 @@
-import 'mainPage.dart';
+import '../mainPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'crud.dart';
+import '../crud.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -19,7 +18,6 @@ class _RegisterState extends State<Register> {
   final TextEditingController _collegeController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
 
-
   bool _isSuccess;
   String _userEmail;
   @override
@@ -29,7 +27,7 @@ class _RegisterState extends State<Register> {
     super.dispose();
   }
 
-    crudMethods crudObj = new crudMethods();
+  crudMethods crudObj = new crudMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -77,27 +75,26 @@ class _RegisterState extends State<Register> {
                     ),
                     TextFormField(
                       controller: _collegeController,
-                      decoration: const InputDecoration(labelText: 'College Name'),
+                      decoration:
+                          const InputDecoration(labelText: 'College Name'),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please enter some text';
                         }
                         return null;
                       },
-                      obscureText: true,
                     ),
                     TextFormField(
                       controller: _subjectController,
-                      decoration: const InputDecoration(labelText: 'Total no. of Subjects'),
+                      decoration: const InputDecoration(
+                          labelText: 'Total no. of Subjects'),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please enter some text';
                         }
                         return null;
                       },
-                      obscureText: true,
                     ),
-		
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       alignment: Alignment.center,
@@ -131,15 +128,21 @@ class _RegisterState extends State<Register> {
       }
       await user.updateProfile(displayName: _displayName.text);
       final user1 = _auth.currentUser;
-      crudObj.addUser({'Name': _displayName.text, 'Email': _emailController.text,'Password': _passwordController.text, 'College': _collegeController.text, 'Total Subjects': _subjectController.text}).then((result) {
-          print("User Added");
+      crudObj.addUser({
+        'Name': _displayName.text,
+        'Email': _emailController.text,
+        'Password': _passwordController.text,
+        'College': _collegeController.text,
+        'Total Subjects': _subjectController.text
+      }).then((result) {
+        print("User Added");
       }).catchError((e) {
         print("Error: $e");
       });
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => MainPage(
-            user: user1,
-          )));
+                user: user1,
+              )));
     } else {
       _isSuccess = false;
     }

@@ -10,16 +10,71 @@ class crudMethods {
       return false;
     }
   }
+
   Future<void> addUser(userData) {
-      return FirebaseFirestore.instance.collection('users').add(userData).then((value) {
-      print("User Added");
-      }).catchError((e) {
-        print(e);
-      });
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .update(userData)
+        .catchError((e) {
+      print(e);
+    });
+
+    // FirebaseFirestore.instance
+    //     .collection('users')
+    //     .add(userData)
+    //     .then((value) {
+    //   print("UID: ${FirebaseAuth.instance.currentUser.uid}");
+    // }).catchError((e) {
+    //   print(e);
+    // });
   }
+
+  Future<void> addSubject(subject) {
+    return FirebaseFirestore.instance
+        .collection('subject')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .update(subject)
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> addAssignment(assignment) {
+    return FirebaseFirestore.instance
+        .collection('assignment')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .update(assignment)
+        .catchError((e) {
+      print(e);
+    });
+  }
+
+  Future<void> addMeeting(meeting) {
+    return FirebaseFirestore.instance
+        .collection('meeting')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .update(meeting)
+        .catchError((e) {
+      print(e);
+    });
+    // return FirebaseFirestore.instance
+    //     .collection('meeting')
+    //     .add(meeting)
+    //     .then((value) {
+    //   print("Meeting Added");
+    // }).catchError((e) {
+    //   print(e);
+    // });
+  }
+
   updateData(sDoc, newValues) {
-    FirebaseFirestore.instance.collection('users').doc(sDoc).update(newValues).catchError((e) {
-    print(e);
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(sDoc)
+        .update(newValues)
+        .catchError((e) {
+      print(e);
     });
   }
 }
