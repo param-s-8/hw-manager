@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class crudMethods {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   bool isLoggedIn() {
     if (FirebaseAuth.instance.currentUser != null) {
       return true;
@@ -12,29 +14,32 @@ class crudMethods {
   }
 
   Future<void> addUser(userData) {
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .update(userData)
-        .catchError((e) {
-      print(e);
-    });
+//    return FirebaseFirestore.instance
+//        .collection('users')
+//        .doc('${FirebaseAuth.instance.currentUser.uid}')
+//        .update(userData).then((value) {
+//          print("UID: ${FirebaseAuth.instance.currentUser.uid}");
+//    } )
+//        .catchError((e) {
+//      print(e);
+//    });
 
-    // FirebaseFirestore.instance
-    //     .collection('users')
-    //     .add(userData)
-    //     .then((value) {
-    //   print("UID: ${FirebaseAuth.instance.currentUser.uid}");
-    // }).catchError((e) {
-    //   print(e);
-    // });
+     return FirebaseFirestore.instance
+         .collection('users')
+         .add(userData)
+         .then((value) {
+       print("UID: ${FirebaseAuth.instance.currentUser.uid}");
+     }).catchError((e) {
+       print(e);
+     });
   }
 
   Future<void> addSubject(subject) {
     return FirebaseFirestore.instance
         .collection('subject')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .update(subject)
+        .add(subject).then((value) {
+      print("UID: ${FirebaseAuth.instance.currentUser.uid}");
+    } )
         .catchError((e) {
       print(e);
     });

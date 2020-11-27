@@ -129,6 +129,7 @@ class _RegisterState extends State<Register> {
       await user.updateProfile(displayName: _displayName.text);
       final user1 = _auth.currentUser;
       crudObj.addUser({
+        'UID': user1.uid,
         'Name': _displayName.text,
         'Email': _emailController.text,
         'Password': _passwordController.text,

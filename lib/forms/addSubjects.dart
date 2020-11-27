@@ -91,6 +91,7 @@ class _addSubjectState extends State<addSubject> {
   void _addNewSubject() async {
     try {
       crudObj.addSubject({
+        'UID': _auth.currentUser.uid,
         'Subject': _subjectController.text,
         'Professor': _professorController.text
       }).then((result) {
