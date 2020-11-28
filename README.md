@@ -1,6 +1,6 @@
 # hw_manager
 
-Manage your homework efficiently.
+Manage your homework and meetings efficiently.
 
 ## Getting Started
 
