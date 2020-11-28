@@ -165,7 +165,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => Register(),
+                      onTap: () => _pushPage(context,Register()),
                       child: RichText(
                         text: TextSpan(
                             children: [
