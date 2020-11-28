@@ -48,8 +48,9 @@ class crudMethods {
   Future<void> addAssignment(assignment) {
     return FirebaseFirestore.instance
         .collection('assignment')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .update(assignment)
+        .add(assignment).then((value) {
+      print("UID: ${FirebaseAuth.instance.currentUser.uid}");
+    } )
         .catchError((e) {
       print(e);
     });
@@ -58,8 +59,9 @@ class crudMethods {
   Future<void> addMeeting(meeting) {
     return FirebaseFirestore.instance
         .collection('meeting')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .update(meeting)
+        .add(meeting).then((value) {
+      print("UID: ${FirebaseAuth.instance.currentUser.uid}");
+    } )
         .catchError((e) {
       print(e);
     });

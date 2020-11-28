@@ -1,19 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../crud.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../screens/home.dart';
 
 class AddAsnmt extends StatefulWidget {
   @override
    AddAsnmtState createState() =>  AddAsnmtState();
 }
 
+crudMethods crudObj = new crudMethods();
+
 class  AddAsnmtState extends State <AddAsnmt> {
   List _subjName = [
     'AI', 'OS', 'TOC', 'INS'
   ];
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime _dateTime;
   String _subjVal, _formattedDT;
   TimeOfDay _time , picked;
+  final TextEditingController _titleController = TextEditingController();
+
   double _boxh = 15;
   @override
   void initState() {
@@ -68,6 +77,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
                   height: 50,
                   margin: EdgeInsets.only(left:40,right:40),
                   child: TextFormField(
+                    controller: _titleController,
                     style: TextStyle(fontSize: 16, color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.assignment,
@@ -109,7 +119,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
                             value: value,
                             child: Text(value,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.grey[700],
                               ),
                             ),
                           );
@@ -189,7 +199,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
                         fontSize: 18,
                       ),
                     ),
-                    onPressed:null,
+                    onPressed: () => _addAssignment(),
                   ),
                 ),
               ],
@@ -198,6 +208,29 @@ class  AddAsnmtState extends State <AddAsnmt> {
         ],
       ),
     );
+  }
+
+  void _addAssignment() async {
+    try {
+      crudObj.addAssignment({
+        'UID': _auth.currentUser.uid,
+        'Title': _titleController.text,
+        'Date': _formattedDT,
+        'Subject': _subjVal,
+        'Time' : _time.toString()
+      }).then((result) {
+        print("Assignment Added");
+      }).catchError((e) {
+        print("Error: $e");
+      });
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
+        return HomePage();
+      }));
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Failed to add Meeting"),
+      ));
+    }
   }
 }
 

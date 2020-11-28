@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import '../mainPage.dart';
-import '../forms/addSubjects.dart';
+import '../screens/home.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -107,7 +107,7 @@ class _SignInState extends State<SignIn> {
         await user.sendEmailVerification();
       }
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-        return addSubject();
+        return HomePage();
       }));
     } catch (e) {
       Scaffold.of(context).showSnackBar(SnackBar(

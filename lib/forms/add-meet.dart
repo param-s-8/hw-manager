@@ -1,18 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../screens/home.dart';
+import '../crud.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AddMeet extends StatefulWidget {
   @override
   _AddMeetState createState() => _AddMeetState();
 }
 
+
+crudMethods crudObj = new crudMethods();
+
 class _AddMeetState extends State<AddMeet> {
   List _subjName = [
     'AI', 'OS', 'TOC', 'INS'
   ];
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime _dateTime;
   String _subjVal, _formattedDT;
+  final TextEditingController _titleController = TextEditingController();
   TimeOfDay _time , picked;
   double _boxh = 15;
   @override
@@ -68,6 +77,7 @@ Future<Null> selectTime(BuildContext context) async{
                   height: 50,
                   margin: EdgeInsets.only(left:40,right:40),
                   child: TextFormField(
+                    controller: _titleController,
                     style: TextStyle(fontSize: 16, color: Colors.white),
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.laptop_windows,
@@ -76,6 +86,7 @@ Future<Null> selectTime(BuildContext context) async{
                       hintText: 'Title/Description',
                       hintStyle: TextStyle(color: Colors.grey[700]),
                       fillColor: Colors.white.withOpacity(0.9),
+
                     ),
                   ),
                 ),
@@ -189,7 +200,7 @@ Future<Null> selectTime(BuildContext context) async{
                         fontSize: 18,
                       ),
                     ),
-                    onPressed:null,
+                    onPressed: () => _addMeeting(),
                   ),
                 ),
               ],
@@ -199,6 +210,31 @@ Future<Null> selectTime(BuildContext context) async{
       ),
     );
   }
+
+
+
+void _addMeeting() async {
+  try {
+    crudObj.addMeeting({
+      'UID': _auth.currentUser.uid,
+      'Title': _titleController.text,
+      'Date': _formattedDT,
+      'Subject': _subjVal,
+      'Time' : _time.toString()
+    }).then((result) {
+      print("Meeting Added");
+    }).catchError((e) {
+      print("Error: $e");
+    });
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
+      return HomePage();
+    }));
+  } catch (e) {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text("Failed to add Meeting"),
+    ));
+  }
+}
 }
 
 

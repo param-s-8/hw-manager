@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hw_manager/forms/addSubjects.dart';
+import '../forms/add-asnmt.dart';
+import '../forms/add-meet.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,6 +38,30 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(builder: (_) {
                       return addSubject();
+                    }));
+                  }),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 16.0),
+              alignment: Alignment.center,
+              child: OutlineButton(
+                  child: Text("Add Meeting"),
+                  onPressed: () async {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (_) {
+                      return AddMeet();
+                    }));
+                  }),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 16.0),
+              alignment: Alignment.center,
+              child: OutlineButton(
+                  child: Text("Add Assignment"),
+                  onPressed: () async {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (_) {
+                      return AddAsnmt();
                     }));
                   }),
             ),
