@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:hw_manager/forms/addSubjects.dart';
+import 'package:hw_manager/screens/showlist.dart';
 import '../forms/add-asnmt.dart';
 import '../forms/add-meet.dart';
+import 'home_screen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,6 +30,30 @@ class _HomePageState extends State<HomePage> {
                 'Home Page',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 16.0),
+              alignment: Alignment.center,
+              child: OutlineButton(
+                  child: Text("Home Screen"),
+                  onPressed: () async {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (_) {
+                      return HomeScreen();
+                    }));
+                  }),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 16.0),
+              alignment: Alignment.center,
+              child: OutlineButton(
+                  child: Text("Show List"),
+                  onPressed: () async {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (_) {
+                      return ShowList();
+                    }));
+                  }),
             ),
             Container(
               padding: const EdgeInsets.only(top: 16.0),

@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../screens/main_drawer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_ui/firestore_ui.dart';
 
 class ShowList extends StatefulWidget {
   @override
@@ -16,9 +17,9 @@ class _ShowListState extends State<ShowList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _ref = FirebaseDatabase.instance.refrence()
-    .child('subject')
-    .OrderByChild('Subject');
+    _ref = FirebaseFirestore.instance
+    .collection('subject')
+    .orderBy('Subject');
   }
 
   Widget _buildListItem({Map subject}){
@@ -144,9 +145,9 @@ class _ShowListState extends State<ShowList> {
           ),
           Expanded(
 
-            child: FirebaseAnimatedList(query: _ref
-              , itembuilder: (BuildContext context, DataSnapshot snapshot, Animation<double>animation , int index){
-              Map subject = snapshot.value;
+            child: FirestoreAnimatedList(query: _ref
+              , itemBuilder: (BuildContext context, DocumentSnapshot snapshot, Animation<double>animation , int index){
+              Map subject = snapshot.data();
               return _buildListItem(subject: subject);
               },),
 
