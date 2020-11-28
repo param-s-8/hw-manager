@@ -16,18 +16,38 @@ class _addSubjectState extends State<addSubject> {
   final TextEditingController _subjectController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _professorController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       key: _scaffoldKey,
-      body: Builder(builder: (BuildContext context) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            addSubjects(),
-          ],
-        );
-      }),
+      body: Stack(
+        children: <Widget>[
+          Scaffold(
+            backgroundColor: Colors.white,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('media/bg-app.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                addSubjects(),
+              ],
+            ),
+          ),
+        ]
+          //Builder(builder: (BuildContext context) {
+          //return ;
+        //}),
+      ),
     );
   }
 
