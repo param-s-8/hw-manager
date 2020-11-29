@@ -32,9 +32,9 @@ class MainDrawer extends StatelessWidget {
 
                     ),
                   ),
-                  Text("Name: VAIBHAVI KUNDLE",
+                  Text("Name: ${_auth.currentUser.displayName}",
                     style: TextStyle(color: Colors.white) ,),
-                  Text("vaibhavikundle20@gmail.com ",
+                  Text("${_auth.currentUser.email}",
                     style: TextStyle(color: Colors.white) ,),
                 ],
               ),
@@ -43,7 +43,7 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Profile'),
-            onTap: _pushPage(context, ProfilePage()),
+            onTap: () => _pushPage(context, ProfilePage()),
           ),
           ListTile(
             leading: Icon(Icons.add),
