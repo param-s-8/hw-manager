@@ -5,6 +5,7 @@ import '../screens/main_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ui/firestore_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../crud.dart';
 
 class ShowList extends StatefulWidget {
   @override
@@ -13,19 +14,26 @@ class ShowList extends StatefulWidget {
 
 class _ShowListState extends State<ShowList> {
   Query _ref;
+  QuerySnapshot sub;
+  crudMethods crudObj = new crudMethods();
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void initState() {
     // TODO: implement initState
+  crudObj.subject().then((QuerySnapshot results) {
+    setState(() {
+      sub = results;
+    });
+  });
     super.initState();
-    _ref = FirebaseFirestore.instance
-    .collection('subject')
-    .where('UID',isEqualTo: _auth.currentUser.uid.toString())
-    .orderBy('Subject');
+//    _ref = FirebaseFirestore.instance
+//    .collection('subject')
+//    .where('UID',isEqualTo: _auth.currentUser.uid.toString())
+//    .orderBy('Subject');
   }
 
-  Widget _buildListItem({Map subject}){
+  Widget _buildListItem({String Subject, String Professor}){
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 2.0),
@@ -72,7 +80,7 @@ class _ShowListState extends State<ShowList> {
                           Icon(Icons.book),
                           SizedBox(width: 10.0,),
 
-                          Text(subject["Subject"]),
+                          Text(Subject),
                         ],
                       ),
                     ),
@@ -84,7 +92,7 @@ class _ShowListState extends State<ShowList> {
                         children: <Widget>[
                           Icon(Icons.person),
                           SizedBox(width: 10.0,),
-                          Text(subject["Professor"]),
+                          Text(Professor),
                         ],
                       ),
                     ),
@@ -92,8 +100,6 @@ class _ShowListState extends State<ShowList> {
 
                   ],
                 ),
-
-
               )
             ],
           ),
@@ -101,79 +107,97 @@ class _ShowListState extends State<ShowList> {
       ) ,
     );
   }
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("HOMEWORK MANAGER"),
-        backgroundColor: Colors.black,
-        centerTitle: true,
-      ),
-      drawer: MainDrawer(),
-      body:
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                InkWell(
-                  child: Container(
-                    color: Colors.black54,
-                    child: Text("TODAY",),
-                    width: 210,
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(85.0, 15.0, 20.0, 5.0),
+    if (sub != null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("HOMEWORK MANAGER"),
+          backgroundColor: Colors.black,
+          centerTitle: true,
+        ),
+        drawer: MainDrawer(),
+        body:
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  InkWell(
+                    child: Container(
+                      color: Colors.black54,
+                      child: Text("TODAY",),
+                      width: 210,
+                      height: 50,
+                      padding: EdgeInsets.fromLTRB(85.0, 15.0, 20.0, 5.0),
+                    ),
+                    onTap: () {},
                   ),
-                  onTap: (){},
-                ),
-                InkWell(
-                  child: Container(
-                    color: Colors.black54,
-                    child: Text("FUTURE"),
-                    width: 200,
-                    height: 50,
-                    padding: EdgeInsets.fromLTRB(80.0, 15.0, 10.0, 5.0),
-
-
-
+                  InkWell(
+                    child: Container(
+                      color: Colors.black54,
+                      child: Text("FUTURE"),
+                      width: 200,
+                      height: 50,
+                      padding: EdgeInsets.fromLTRB(80.0, 15.0, 10.0, 5.0),
+                    ),
+                    onTap: () {},
                   ),
-                  onTap: (){},
-                ),
 
-              ]
-          ),
-          SizedBox(
-            height: 30.0,
-          ),
-          Expanded(
+                ]
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
 
-            child: FirestoreAnimatedList(query: _ref
-              , itemBuilder: (BuildContext context, DocumentSnapshot snapshot, Animation<double>animation , int index){
-              Map subject = snapshot.data();
-              return _buildListItem(subject: subject);
-              },),
+            Expanded(
 
+              child: ListView.builder(
+                itemCount: sub.docs.length,
+                itemBuilder: (context, index) {
+                  return _buildListItem(Subject: sub.docs[index].get('Subject'),
+                      Professor: sub.docs[index].get('Professor')
+                  );
+                },),
+            ),
 
-          ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
 
+        },
+          backgroundColor: Colors.black,
+          child: Icon(Icons.add, color: Colors.white,),),
 
-
-        ],
+      );
+    }
+  else {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text("HOMEWORK MANAGER"),
+      backgroundColor: Colors.black,
+      centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
+    drawer: MainDrawer(),
+    body:
+    Column(
+    mainAxisAlignment: MainAxisAlignment.center,
 
-      },
-        backgroundColor: Colors.black,
-        child: Icon(Icons.add, color: Colors.white,),) ,
+      children: <Widget>[
 
-    );
-
-
-
-
-
-
+          Container(
+            padding: EdgeInsets.only(left: 90),
+            child: Text("Loading...",
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 40),
+              textAlign: TextAlign.center,
+            ),
+          )
+      ]
+    ));
+  }
   }
 }
 

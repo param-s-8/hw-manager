@@ -45,6 +45,21 @@ class crudMethods {
     });
   }
 
+  Future<QuerySnapshot> subject() async {
+    return await FirebaseFirestore.instance
+        .collection('subject').where('UID',isEqualTo: _auth.currentUser.uid.toString()).orderBy('Subject').get();
+  }
+
+  Future<QuerySnapshot> meeting() async {
+    return await FirebaseFirestore.instance
+        .collection('meeting').where('UID',isEqualTo: _auth.currentUser.uid.toString()).orderBy('Time').get();
+  }
+
+  Future<QuerySnapshot> assignment() async {
+    return await FirebaseFirestore.instance
+        .collection('assignment').where('UID',isEqualTo: _auth.currentUser.uid.toString()).orderBy('Time').get();
+  }
+
   Future<void> addAssignment(assignment) {
     return FirebaseFirestore.instance
         .collection('assignment')

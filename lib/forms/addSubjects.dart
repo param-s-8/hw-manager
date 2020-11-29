@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/home.dart';
 import '../crud.dart';
@@ -23,82 +24,105 @@ class _addSubjectState extends State<addSubject> {
 
       key: _scaffoldKey,
       body: Stack(
-        children: <Widget>[
-          Scaffold(
-            backgroundColor: Colors.white,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('media/bg-app.png'),
-                fit: BoxFit.cover,
+          children: <Widget>[
+            Scaffold(
+              backgroundColor: Colors.white,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('media/bg-app.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                addSubjects(),
-              ],
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  addSubjects(),
+                ],
+              ),
             ),
-          ),
-        ]
-          //Builder(builder: (BuildContext context) {
-          //return ;
+          ]
+        //Builder(builder: (BuildContext context) {
+        //return ;
         //}),
       ),
     );
   }
 
   Widget addSubjects() {
-    return Form(
-        key: _formKey,
-        child: Card(
+    return Expanded(
+      child: Form(
+          key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(20,50,30,100),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
+                  padding: EdgeInsets.only(bottom: 20),
+
                   child: const Text(
                     'Enter Subjects',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 30),
                   ),
                   alignment: Alignment.center,
                 ),
+                SizedBox(
+                  height: 15,
+                ),
                 TextFormField(
+
                   controller: _subjectController,
-                  decoration: const InputDecoration(labelText: 'Subject'),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  decoration: const InputDecoration(border: UnderlineInputBorder(),labelText: 'Subject',labelStyle: TextStyle(
+                      color: Colors.white
+                  )),
                   validator: (value) {
                     if (value.isEmpty) return 'Please enter some text';
                     return null;
                   },
                 ),
+                SizedBox(
+                  height: 15,
+                ),
                 TextFormField(
                   controller: _professorController,
-                  decoration: const InputDecoration(labelText: 'Professor'),
+                  style: TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(labelText: 'Professor',labelStyle: TextStyle(
+                      color: Colors.white
+                  ),),
                   validator: (value) {
                     if (value.isEmpty) return 'Please enter some text';
                     return null;
                   },
                 ),
                 Container(
-                  padding: const EdgeInsets.only(top: 16.0),
+                  padding: const EdgeInsets.only(top: 50.0),
+
                   alignment: Alignment.center,
-                  child: OutlineButton(
-                    child: Text("Confirm"),
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        _addNewSubject();
-                      }
-                    },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white
+                    ),
+                    child: FlatButton(
+
+
+                      child: Text("Add Subject",style: TextStyle(color: Colors.black,fontSize: 18),),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          _addNewSubject();
+                        }
+                      },
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-        ));
+          )),
+    );
   }
 
   @override

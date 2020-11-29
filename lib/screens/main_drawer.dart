@@ -6,6 +6,7 @@ import '../forms/add-asnmt.dart';
 import '../forms/add-meet.dart';
 import '../forms/addSubjects.dart';
 import 'user_profile.dart';
+import 'home.dart';
 
 class MainDrawer extends StatelessWidget {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -68,7 +69,7 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.hourglass_empty),
             title: Text('Pending Tasks'),
-            onTap: null,
+            onTap: () => _pushPage(context, HomePage()),
           ),
           ListTile(
             leading: Icon(Icons.arrow_back),

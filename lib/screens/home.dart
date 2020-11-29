@@ -1,7 +1,8 @@
 //get data
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hw_manager/forms/addSubjects.dart';
+import 'package:hw_manager/screens/show_meeting.dart';
+import 'package:hw_manager/screens/show_asnmt.dart';
 import 'package:hw_manager/screens/showlist.dart';
 import '../forms/add-asnmt.dart';
 import '../forms/add-meet.dart';
@@ -66,11 +67,11 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 16.0),
               alignment: Alignment.center,
               child: OutlineButton(
-                  child: Text("Add Subject"),
+                  child: Text("Show Meeting"),
                   onPressed: () async {
                     Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(builder: (_) {
-                      return addSubject();
+                      return ShowMeeting();
                     }));
                   }),
             ),
@@ -78,11 +79,11 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 16.0),
               alignment: Alignment.center,
               child: OutlineButton(
-                  child: Text("Add Meeting"),
+                  child: Text("Show Assignment"),
                   onPressed: () async {
                     Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(builder: (_) {
-                      return AddMeet();
+                      return ShowAsnmt();
                     }));
                   }),
             ),
