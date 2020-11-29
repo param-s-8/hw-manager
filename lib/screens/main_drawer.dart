@@ -5,6 +5,7 @@ import 'showlist.dart';
 import '../forms/add-asnmt.dart';
 import '../forms/add-meet.dart';
 import '../forms/addSubjects.dart';
+import 'user_profile.dart';
 
 class MainDrawer extends StatelessWidget {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -42,27 +43,27 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Profile'),
-            onTap: null,
+            onTap: _pushPage(context, ProfilePage()),
           ),
           ListTile(
             leading: Icon(Icons.add),
             title: Text('Add a meeting'),
-            onTap: () => AddMeet(),
+            onTap: () => _pushPage(context, AddMeet()),
           ),
           ListTile(
             leading: Icon(Icons.assignment),
             title: Text('Add a assignment'),
-            onTap: () => AddAsnmt(),
+            onTap: () => _pushPage(context, AddAsnmt()),
           ),
           ListTile(
             leading: Icon(Icons.assignment),
             title: Text('Add a subject'),
-            onTap: () => addSubject(),
+            onTap: () => _pushPage(context, addSubject()),
           ),
           ListTile(
             leading: Icon(Icons.book),
             title: Text('View all Subjects'),
-            onTap: () => ShowList(),
+            onTap: () => _pushPage(context,ShowList()),
           ),
           ListTile(
             leading: Icon(Icons.hourglass_empty),
@@ -85,5 +86,11 @@ class MainDrawer extends StatelessWidget {
   }
   Future _signOut() async {
     await _auth.signOut();
+  }
+
+  void _pushPage(BuildContext context, Widget page) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => page),
+    );
   }
 }

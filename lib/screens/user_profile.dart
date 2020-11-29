@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   Widget _profileText(){
     return Padding(
         padding: EdgeInsets.all(5),
@@ -76,9 +78,9 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: 'Name', icon: Icons.person,)),
-            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: 'E-Mail', icon: Icons.mail,)),
-            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: 'College', icon: Icons.school,)),
+            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: '${_auth.currentUser.displayName}', icon: Icons.person,)),
+            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: '${_auth.currentUser.email}', icon: Icons.mail,)),
+            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: '${_auth.currentUser.uid}', icon: Icons.school,)),
             Container(
               padding: EdgeInsets.symmetric(vertical: 5),
               width: double.infinity,
