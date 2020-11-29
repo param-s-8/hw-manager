@@ -1,5 +1,5 @@
 //get data
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hw_manager/forms/addSubjects.dart';
 import 'package:hw_manager/screens/showlist.dart';
@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               child: Text(
-                'Home Page',
+                'Home Page of',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              ),
+            ),
+            Container(
+              child: Text(
+                '${_auth.currentUser.displayName}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
             ),

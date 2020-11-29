@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../auth/signIn.dart';
+import 'showlist.dart';
+import '../forms/add-asnmt.dart';
+import '../forms/add-meet.dart';
+import '../forms/addSubjects.dart';
 
 class MainDrawer extends StatelessWidget {
+  FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -40,17 +47,22 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.add),
             title: Text('Add a meeting'),
-            onTap: null,
+            onTap: () => AddMeet(),
           ),
           ListTile(
             leading: Icon(Icons.assignment),
             title: Text('Add a assignment'),
-            onTap: null,
+            onTap: () => AddAsnmt(),
+          ),
+          ListTile(
+            leading: Icon(Icons.assignment),
+            title: Text('Add a subject'),
+            onTap: () => addSubject(),
           ),
           ListTile(
             leading: Icon(Icons.book),
             title: Text('View all Subjects'),
-            onTap: null,
+            onTap: () => ShowList(),
           ),
           ListTile(
             leading: Icon(Icons.hourglass_empty),
@@ -58,17 +70,20 @@ class MainDrawer extends StatelessWidget {
             onTap: null,
           ),
           ListTile(
-            leading: Icon(Icons.arrow_forward),
-            title: Text('Register'),
-            onTap: null,
-          ),
-          ListTile(
             leading: Icon(Icons.arrow_back),
             title: Text('Logout'),
-            onTap: null,
+            onTap: () {
+              _signOut().whenComplete(() {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => SignIn()));
+              });
+            },
           ),
         ],
       ),
     );
+  }
+  Future _signOut() async {
+    await _auth.signOut();
   }
 }

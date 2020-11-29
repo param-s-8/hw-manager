@@ -218,11 +218,6 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  // ignore: unused_element
-  void _signOut() async {
-    await _auth.signOut();
-  }
-
   void _pushPage(BuildContext context, Widget page) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => page),

@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import '../screens/main_drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ui/firestore_ui.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ShowList extends StatefulWidget {
   @override
@@ -13,12 +14,14 @@ class ShowList extends StatefulWidget {
 class _ShowListState extends State<ShowList> {
   Query _ref;
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _ref = FirebaseFirestore.instance
     .collection('subject')
+    .where('UID',isEqualTo: _auth.currentUser.uid.toString())
     .orderBy('Subject');
   }
 
