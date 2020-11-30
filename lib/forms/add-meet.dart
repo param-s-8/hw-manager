@@ -23,7 +23,7 @@ class _AddMeetState extends State<AddMeet> {
   String _subjVal, _formattedDT;
   final TextEditingController _titleController = TextEditingController();
   TimeOfDay _time , picked;
-  double _boxh = 15;
+  double _boxh = 20;
   @override
   void initState() {
     super.initState();
@@ -58,86 +58,91 @@ Future<Null> selectTime(BuildContext context) async{
                 ),
               ),
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.laptop,
-                  size: 60,
-                  ),
-                  Text(
-                    "ADD A MEETING",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: _boxh*3),
-                  Container(
-                    height: 50,
-                    margin: EdgeInsets.only(left:40,right:40),
-                    child: TextFormField(
-                      controller: _titleController,
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.laptop_windows,
-                          color: Colors.white,
-                        ),
-                        hintText: 'Title/Description',
-                        hintStyle: TextStyle(color: Colors.grey[700]),
-                        fillColor: Colors.white.withOpacity(0.9),
-
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: _boxh*3),
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        height: 50,
-                        margin: EdgeInsets.only(left:40,right:40),
-                        child: DropdownButton(
-                          hint: Text(
-                            'Select Subject',
-                            style: TextStyle(
-                                color: Colors.white,
-                            ),
-                          ),
-                          dropdownColor: Colors.white,
-                          focusColor: Colors.white,
-                          icon: Icon(Icons.arrow_drop_down,
-                          color: Colors.white,
-                          ),
-                          iconSize: 36,
-                          value: _subjVal,
-                            onChanged:(value){
-                              setState(() {
-                                _subjVal = value;
-                              });
-                            },
-                        items: _subjName.map((value) {
-                          return DropdownMenuItem(
-                            value: value,
-                            child: Text(value,
-                            style: TextStyle(
-                              color: Colors.grey[700],
-                            ),
-                            ),
-                          );
-                        }).toList(),
-                        ),
-                      ),
-                      Column(
+            DraggableScrollableSheet(
+              initialChildSize: 1,
+              minChildSize: 1,
+              maxChildSize: 1,
+              builder: (context, scrollController){
+                return SingleChildScrollView(
+                  controller: scrollController,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 90.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
+                          Icon(Icons.laptop, size: 65, color: Colors.white,),
+                          Text(
+                            "ADD MEETING",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: _boxh),
+                          Container(
+                            //height: 50,
+                            margin: EdgeInsets.only(left:60,right:60),
+                            child: TextFormField(
+                              controller: _titleController,
+                              style: TextStyle(fontSize: 16, color: Colors.white),
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.laptop_windows,
+                                  color: Colors.white,
+                                ),
+                                hintText: 'Title/Description',
+                                hintStyle: TextStyle(color: Colors.grey[700]),
+                                fillColor: Colors.white.withOpacity(0.9),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: _boxh),
+                          Container(
+                            height: 50,
+                            margin: EdgeInsets.only(left:60,right:60),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: Text(
+                                'Select Subject',
+                                style: TextStyle(
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                              dropdownColor: Colors.white,
+                              focusColor: Colors.white,
+                              icon: Icon(Icons.arrow_drop_down,
+                                color: Colors.white,
+                              ),
+                              iconSize: 36,
+                              value: _subjVal,
+                              onChanged:(value){
+                                setState(() {
+                                  _subjVal = value;
+                                });
+                              },
+                              items: _subjName.map((value) {
+                                return DropdownMenuItem(
+                                  value: value,
+                                  child: Text(value,
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          SizedBox(height: _boxh),
                           Container(
                             height: 40,
+                            width: 300,
                             child: RaisedButton(
                               color: Colors.grey,
                               child: Text(
                                 _dateTime != null ? 'Pick another date' : 'Enter Date Of Meeting',
                                 style: TextStyle(
-                                  color: Colors.grey[800],
+                                  color: Colors.black,
                                 ),
                               ),
                               onPressed: (){
@@ -164,48 +169,46 @@ Future<Null> selectTime(BuildContext context) async{
                               ),
                             ),
                           ),
+                          SizedBox(height: _boxh),
+                          Container(
+                            height: 40,
+                            margin: EdgeInsets.only(left:40,right:40),
+                            child: ListTile(
+                              title: Text(
+                                _time!=null ? 'Meeting Time: ${_time.hour} : ${_time.minute}' : 'Pick a time for meeting',
+                                style: TextStyle(
+                                  color: _time!=null ? Colors.white : Colors.grey[700],
+                                ),
+                              ),
+                              leading: Icon(Icons.access_time, color: Colors.white,),
+                              onTap: () {
+                                selectTime(context);
+                                print(_time);
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 50,),
+                          Container(
+                            height: 40,
+                            margin: EdgeInsets.only(left:40,right:40),
+                            color: Colors.white,
+                            child: OutlineButton(
+                              child: Text(
+                                "ADD MEETING",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              onPressed: () => _addMeeting(),
+                            ),
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                  SizedBox(height: _boxh),
-                  Container(
-                    height: 40,
-                    margin: EdgeInsets.only(left:40,right:40),
-                    child: ListTile(
-                      title: Text(
-                          _time!=null ? 'Meeting Time: ${_time.hour} : ${_time.minute}' : 'Pick a time for meeting',
-                        style: TextStyle(
-                          color: _time!=null ? Colors.white : Colors.grey[700],
-                        ),
-                      ),
-                      leading: Icon(Icons.access_time,
-                      color: Colors.white,
-                      ),
-                      onTap: () {
-                        selectTime(context);
-                        print(_time);
-                      },
                     ),
                   ),
-                  SizedBox(height: 30,),
-                  Container(
-                    height: 40,
-                    margin: EdgeInsets.only(left:40,right:40),
-                    color: Colors.white,
-                    child: OutlineButton(
-                      child: Text(
-                        "ADD MEETING",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      onPressed: () => _addMeeting(),
-                    ),
-                  ),
-                ],
-              ),
+                );
+              }
             ),
           ],
         ),

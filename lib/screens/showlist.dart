@@ -6,7 +6,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ui/firestore_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../crud.dart';
-
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import '../forms/add-asnmt.dart';
+import '../forms/add-meet.dart';
 class ShowList extends StatefulWidget {
   @override
   _ShowListState createState() => _ShowListState();
@@ -111,6 +113,11 @@ class _ShowListState extends State<ShowList> {
 
   @override
   Widget build(BuildContext context) {
+    void _pushPage(BuildContext context, Widget page) {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => page),
+      );
+    }
     if (sub != null) {
       return Scaffold(
         appBar: AppBar(
@@ -166,11 +173,24 @@ class _ShowListState extends State<ShowList> {
 
           ],
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-
-        },
+        floatingActionButton: SpeedDial(
+          animatedIcon: AnimatedIcons.add_event,
           backgroundColor: Colors.black,
-          child: Icon(Icons.add, color: Colors.white,),),
+          children: [
+            SpeedDialChild(
+              child:  Icon(Icons.assignment,color: Colors.white,),
+              backgroundColor: Colors.black,
+              label: "Add Assignment",
+              onTap: ()=>  _pushPage(context, AddAsnmt()) ,
+            ),
+            SpeedDialChild(
+              child:  Icon(Icons.camera_alt,color: Colors.white,),
+              backgroundColor: Colors.black,
+              label: "Add Meeting",
+              onTap: () => _pushPage(context, AddMeet()),
+            ),
+          ],
+        )
 
       );
     }

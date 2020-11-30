@@ -27,6 +27,7 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   firestore_ui:
+  flutter_speed_dial: ^1.2.5
 
 
 

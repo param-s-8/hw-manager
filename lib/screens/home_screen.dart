@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import '../screens/main_drawer.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -65,11 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
           ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-
-      },
-        backgroundColor: Colors.black,
-      child: Icon(Icons.add, color: Colors.white,),) ,
+      floatingActionButton:  SpeedDial(
+        animatedIcon: AnimatedIcons.close_menu,
+        children: [
+          SpeedDialChild(
+            child:  Icon(Icons.assignment,color: Colors.white,),
+            backgroundColor: Colors.black,
+          )
+        ],
+      )
 
       );
 

@@ -21,7 +21,6 @@ class _addSubjectState extends State<addSubject> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       key: _scaffoldKey,
       body: Stack(
           children: <Widget>[
@@ -37,11 +36,13 @@ class _addSubjectState extends State<addSubject> {
               ),
             ),
             Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  addSubjects(),
-                ],
+              child: Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    addSubjects(),
+                  ],
+                ),
               ),
             ),
           ]
@@ -53,76 +54,82 @@ class _addSubjectState extends State<addSubject> {
   }
 
   Widget addSubjects() {
-    return Expanded(
-      child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20,50,30,100),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(bottom: 20),
-
-                  child: const Text(
-                    'Enter Subjects',
-                    style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 30),
-                  ),
-                  alignment: Alignment.center,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-
-                  controller: _subjectController,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                  decoration: const InputDecoration(border: UnderlineInputBorder(),labelText: 'Subject',labelStyle: TextStyle(
-                      color: Colors.white
-                  )),
-                  validator: (value) {
-                    if (value.isEmpty) return 'Please enter some text';
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: _professorController,
-                  style: TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(labelText: 'Professor',labelStyle: TextStyle(
-                      color: Colors.white
-                  ),),
-                  validator: (value) {
-                    if (value.isEmpty) return 'Please enter some text';
-                    return null;
-                  },
-                ),
-                Container(
-                  padding: const EdgeInsets.only(top: 50.0),
-
-                  alignment: Alignment.center,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white
-                    ),
-                    child: FlatButton(
-
-
-                      child: Text("Add Subject",style: TextStyle(color: Colors.black,fontSize: 18),),
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          _addNewSubject();
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ],
+    return Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.assignment,
+              size: 70,
+              color: Colors.white,
             ),
-          )),
-    );
+            Container(
+              padding: EdgeInsets.all(20),
+              child: const Text(
+                'ENTER SUBJECT',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 30),
+              ),
+              alignment: Alignment.center,
+            ),
+            SizedBox(height: 15,),
+            Container(
+              margin: EdgeInsets.only(left: 40, right: 40),
+              child: TextFormField(
+                controller: _subjectController,
+                style: TextStyle(fontSize: 16, color: Colors.white),
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.library_books,color: Colors.white,),
+                    border: UnderlineInputBorder(),
+                    labelText: 'Subject',
+                    labelStyle: TextStyle(
+                    color: Colors.grey,
+                )
+                ),
+                validator: (value) {
+                  if (value.isEmpty) return 'Please Enter Subject Name';
+                  return null;
+                },
+              ),
+            ),
+            SizedBox(height: 15,),
+            Container(
+              margin: EdgeInsets.only(left: 40, right: 40),
+              child: TextFormField(
+                controller: _professorController,
+                style: TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.person,color: Colors.white,),
+                  labelText: 'Professor',labelStyle: TextStyle(
+                    color: Colors.grey
+                ),),
+                validator: (value) {
+                  if (value.isEmpty) return 'Please Enter Professor Name';
+                  return null;
+                },
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 30.0),
+              alignment: Alignment.center,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white
+                ),
+                child: FlatButton(
+                  child: Text("ADD SUBJECT",style: TextStyle(color: Colors.black,fontSize: 18),),
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) {
+                      _addNewSubject();
+                    }
+                  },
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 
   @override

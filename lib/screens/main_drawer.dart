@@ -28,7 +28,7 @@ class MainDrawer extends StatelessWidget {
                     margin: EdgeInsets.only(top: 30,bottom: 10),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      image: DecorationImage(image: NetworkImage('https://image.shutterstock.com/image-vector/user-member-vector-icon-ui-260nw-1180939933.jpg'),
+                      image: DecorationImage(image: AssetImage('media/user.jpg'),
                       fit: BoxFit.fill),
 
                     ),
