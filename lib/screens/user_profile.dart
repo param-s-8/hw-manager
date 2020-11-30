@@ -15,10 +15,12 @@ class _ProfilePageState extends State<ProfilePage> {
   QuerySnapshot user;
   crudMethods crudObj = new crudMethods();
 
-  final TextEditingController _displayName = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _subjectController = TextEditingController();
-  final TextEditingController _collegeController = TextEditingController();
+  TextEditingController _displayName = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _subjectController = TextEditingController();
+  TextEditingController _collegeController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void initState() {
     // TODO: implement initState
@@ -26,7 +28,18 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         user = results;
       });
-      user.docs.forEach((element) {print(element.get("Name"));});
+      user.docs.forEach((element) {
+        print(element.get("Name"));
+        print(element.get("Password"));
+        print(element.get("Total Subjects"));
+        _displayName = TextEditingController(text: element.get("Name"));
+        _passwordController = TextEditingController(text: element.get("Password"));
+        _subjectController = TextEditingController(text: element.get("Total Subjects"));
+        _collegeController = TextEditingController(text: element.get("College"));
+        _emailController = TextEditingController(text: element.get("Email"));
+        print(_displayName.text);
+
+      });
     });
     super.initState();
   }
@@ -64,115 +77,123 @@ class _ProfilePageState extends State<ProfilePage> {
   }
   Widget _textFormField()
   {
-    user.docs.forEach((element) {
-      return Material(
+    if(user!=null) {
+      user.docs.forEach((element) {
+        return Material(
 
-      elevation: 4,
-      shadowColor: Colors.grey,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10,),
-      ),
-      child: Column(
-        children: <Widget>[
-        TextFormField(
-          initialValue: '${element.get("Name")}',
-          controller: _displayName,
-          decoration: InputDecoration(
-              focusedBorder: InputBorder.none,
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              prefixIcon: Icon(Icons.person,color: Colors.black),
-              hintText: 'Full Name',
-              hintStyle: TextStyle(
-                letterSpacing: 2,
-                color: Colors.black26,
-                fontWeight: FontWeight.bold,
-              ),
-              filled: true,
-              fillColor: Colors.white30),
-        ),
-          TextFormField(
-            initialValue: '${element.get("Email")}',
-            decoration: InputDecoration(
-                focusedBorder: InputBorder.none,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                prefixIcon: Icon(Icons.email,color: Colors.black),
-                hintText: 'Email',
-                hintStyle: TextStyle(
-                  letterSpacing: 2,
-                  color: Colors.black26,
-                  fontWeight: FontWeight.bold,
-                ),
-                filled: true,
-                fillColor: Colors.white30),
-          ),
-          TextFormField(
-            initialValue: '${element.get("Password")}',
-            controller: _passwordController,
-            decoration: InputDecoration(
-                focusedBorder: InputBorder.none,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                prefixIcon: Icon(Icons.lock,color: Colors.black),
-                hintText: 'Password',
-                hintStyle: TextStyle(
-                  letterSpacing: 2,
-                  color: Colors.black26,
-                  fontWeight: FontWeight.bold,
-                ),
-                filled: true,
-                fillColor: Colors.white30),
-          ),
-          TextFormField(
-            initialValue: '${element.get("College")}',
-            controller: _collegeController,
-            decoration: InputDecoration(
-                focusedBorder: InputBorder.none,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                prefixIcon: Icon(Icons.school,color: Colors.black),
-                hintText: 'College Name',
-                hintStyle: TextStyle(
-                  letterSpacing: 2,
-                  color: Colors.black26,
-                  fontWeight: FontWeight.bold,
-                ),
-                filled: true,
-                fillColor: Colors.white30),
-          ),
-          TextFormField(
-            initialValue: '${element.get("Total Subjects")}',
-            controller: _subjectController,
-            decoration: InputDecoration(
-                focusedBorder: InputBorder.none,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                prefixIcon: Icon(Icons.library_books,color: Colors.black),
-                hintText: 'Number of Subjects',
-                hintStyle: TextStyle(
-                  letterSpacing: 2,
-                  color: Colors.black26,
-                  fontWeight: FontWeight.bold,
-                ),
-                filled: true,
-                fillColor: Colors.white30),
-          ),
+            elevation: 4,
+            shadowColor: Colors.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10,),
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    controller: _displayName,
+                    decoration: InputDecoration(
+                        focusedBorder: InputBorder.none,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.person, color: Colors.black),
+                        hintText: 'Full Name',
+                        hintStyle: TextStyle(
+                          letterSpacing: 2,
+                          color: Colors.black26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white30),
+                  ),
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                        focusedBorder: InputBorder.none,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.email, color: Colors.black),
+                        hintText: 'Email',
+                        hintStyle: TextStyle(
+                          letterSpacing: 2,
+                          color: Colors.black26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white30),
+                  ),
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                        focusedBorder: InputBorder.none,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.lock, color: Colors.black),
+                        hintText: 'Password',
+                        hintStyle: TextStyle(
+                          letterSpacing: 2,
+                          color: Colors.black26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white30),
+                  ),
+                  TextFormField(
+                    controller: _collegeController,
+                    decoration: InputDecoration(
+                        focusedBorder: InputBorder.none,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.school, color: Colors.black),
+                        hintText: 'College Name',
+                        hintStyle: TextStyle(
+                          letterSpacing: 2,
+                          color: Colors.black26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white30),
+                  ),
+                  TextFormField(
 
-    ],
-      )
-    );
-  });
+                    controller: _subjectController,
+                    decoration: InputDecoration(
+                        focusedBorder: InputBorder.none,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(
+                            Icons.library_books, color: Colors.black),
+                        hintText: 'Number of Subjects',
+                        hintStyle: TextStyle(
+                          letterSpacing: 2,
+                          color: Colors.black26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white30),
+                  ),
+
+                ],
+              ),
+            )
+        );
+      }
+      );
+    }else{
+      return Container(
+        child: Text("Loading"),
+      );
+    }
   }
 
   Widget _textFormFieldCalling(){
@@ -182,7 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
+          children: <Widget>[
             _textFormField(),
             Container(
               padding: EdgeInsets.symmetric(vertical: 5),
@@ -233,12 +254,6 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 CustomPaint(
                   child: Container(
-                    child: Center(
-                      child:  Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[],
-                      ),
-                    ),
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                   ),
@@ -250,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     _profileText(),
                     _circleAvatar(),
                     _textFormFieldCalling(),
-                  ],
+                  ].where((child) => child!=null).toList(),
                 ),
               ],
             ),
