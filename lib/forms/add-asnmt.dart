@@ -55,7 +55,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
 
   @override
   Widget build(BuildContext context) {
-    if(sub.length!=0) {
+    if(sub!=null) {
       return Scaffold(
         body: Stack(
           children: <Widget>[
@@ -242,7 +242,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
       );
     }
     else{
-      Text("Loading...");
+      return Container(child: Text("Loading..."));
     }
   }
 
