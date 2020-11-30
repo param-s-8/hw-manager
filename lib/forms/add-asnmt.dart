@@ -16,7 +16,6 @@ class AddAsnmt extends StatefulWidget {
 class  AddAsnmtState extends State <AddAsnmt> {
   List<QueryDocumentSnapshot> sub;
   crudMethods crudObj = new crudMethods();
-  Map _subjName;
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime _dateTime;
@@ -33,8 +32,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
       setState(() {
         sub = results.docs.toList();
         print(results.docs.toList().length);
-        results.docs.forEach((element) {
-          _subjName.add(element["Subject"]);
+        sub.forEach((element) {
           print(element["Subject"]);
         });
         
@@ -57,25 +55,26 @@ class  AddAsnmtState extends State <AddAsnmt> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-            children: <Widget>[
-              Scaffold(
-                backgroundColor: Colors.white,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('media/bg-app.png'),
-                    fit: BoxFit.cover,
-                  ),
+    if(sub.length!=0) {
+      return Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Scaffold(
+              backgroundColor: Colors.white,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('media/bg-app.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
-              DraggableScrollableSheet(
+            ),
+            DraggableScrollableSheet(
                 initialChildSize: 1,
                 minChildSize: 1,
                 maxChildSize: 1,
-                builder: (context, scrollController){
+                builder: (context, scrollController) {
                   return SingleChildScrollView(
                     controller: scrollController,
                     child: Center(
@@ -84,7 +83,8 @@ class  AddAsnmtState extends State <AddAsnmt> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Icon(Icons.assignment, size: 65,color: Colors.white,),
+                            Icon(Icons.assignment, size: 65,
+                              color: Colors.white,),
                             Text(
                               "ADD ASSIGNMENT",
                               style: TextStyle(
@@ -96,10 +96,11 @@ class  AddAsnmtState extends State <AddAsnmt> {
                             SizedBox(height: _boxh),
                             Container(
                               //height: 50,
-                              margin: EdgeInsets.only(left:60,right:60),
+                              margin: EdgeInsets.only(left: 60, right: 60),
                               child: TextFormField(
                                 controller: _titleController,
-                                style: TextStyle(fontSize: 16, color: Colors.white),
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.assignment,
                                     color: Colors.white,
@@ -113,7 +114,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
                             SizedBox(height: _boxh),
                             Container(
                               height: 50,
-                              margin: EdgeInsets.only(left:60,right:60),
+                              margin: EdgeInsets.only(left: 60, right: 60),
                               child: DropdownButton(
                                 isExpanded: true,
                                 hint: Text(
@@ -129,15 +130,15 @@ class  AddAsnmtState extends State <AddAsnmt> {
                                 ),
                                 iconSize: 36,
                                 value: _subjVal,
-                                onChanged:(value){
+                                onChanged: (value) {
                                   setState(() {
                                     _subjVal = value;
                                   });
                                 },
-                                items: _subjName.map((value) {
+                                items: sub.map((element) {
                                   return DropdownMenuItem(
-                                    value: value,
-                                    child: Text(value,
+                                    value: element["Subject"],
+                                    child: Text(element["Subject"],
                                       style: TextStyle(
                                         color: Colors.grey[700],
                                       ),
@@ -153,22 +154,27 @@ class  AddAsnmtState extends State <AddAsnmt> {
                               child: RaisedButton(
                                 color: Colors.grey,
                                 child: Text(
-                                  _dateTime != null ? 'Pick another date' : 'Enter Submission Date',
+                                  _dateTime != null
+                                      ? 'Pick another date'
+                                      : 'Enter Submission Date',
                                   style: TextStyle(
                                     color: Colors.black,
                                   ),
                                 ),
-                                onPressed: (){
+                                onPressed: () {
                                   showDatePicker(
                                     context: context,
-                                    initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                                    initialDate: _dateTime == null ? DateTime
+                                        .now() : _dateTime,
                                     firstDate: DateTime(2020),
                                     lastDate: DateTime(2025),
                                     initialEntryMode: DatePickerEntryMode.input,
-                                  ).then((date){
+                                  ).then((date) {
                                     setState(() {
                                       _dateTime = date;
-                                      _formattedDT = DateFormat('dd-MM-yyyy').format(_dateTime);
+                                      _formattedDT =
+                                          DateFormat('dd-MM-yyyy').format(
+                                              _dateTime);
                                     });
                                   });
                                 },
@@ -176,7 +182,9 @@ class  AddAsnmtState extends State <AddAsnmt> {
                             ),
                             Container(
                               child: Text(
-                                _dateTime == null ? 'No date has been picked yet!' : _formattedDT,
+                                _dateTime == null
+                                    ? 'No date has been picked yet!'
+                                    : _formattedDT,
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -185,15 +193,21 @@ class  AddAsnmtState extends State <AddAsnmt> {
                             SizedBox(height: _boxh),
                             Container(
                               height: 40,
-                              margin: EdgeInsets.only(left:40,right:40),
+                              margin: EdgeInsets.only(left: 40, right: 40),
                               child: ListTile(
                                 title: Text(
-                                  _time!=null ? 'Submission Deadline: ${_time.hour} : ${_time.minute} ${_time.period.toString().substring(10,12)}' : 'Enter Time of Deadline',
+                                  _time != null
+                                      ? 'Submission Deadline: ${_time
+                                      .hour} : ${_time.minute} ${_time.period
+                                      .toString().substring(10, 12)}'
+                                      : 'Enter Time of Deadline',
                                   style: TextStyle(
-                                    color: _time!=null ? Colors.white : Colors.grey[700],
+                                    color: _time != null ? Colors.white : Colors
+                                        .grey[700],
                                   ),
                                 ),
-                                leading: Icon(Icons.access_time,color: Colors.white,),
+                                leading: Icon(
+                                  Icons.access_time, color: Colors.white,),
                                 onTap: () {
                                   selectTime(context);
                                   print(_time);
@@ -203,7 +217,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
                             SizedBox(height: 50,),
                             Container(
                               height: 40,
-                              margin: EdgeInsets.only(left:40,right:40),
+                              margin: EdgeInsets.only(left: 40, right: 40),
                               color: Colors.white,
                               child: OutlineButton(
                                 child: Text(
@@ -222,10 +236,14 @@ class  AddAsnmtState extends State <AddAsnmt> {
                     ),
                   );
                 }
-              ),
-            ],
-          ),
+            ),
+          ],
+        ),
       );
+    }
+    else{
+      Text("Loading...");
+    }
   }
 
   void _addAssignment() async {
