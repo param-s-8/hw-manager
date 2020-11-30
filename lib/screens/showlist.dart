@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import '../screens/main_drawer.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ui/firestore_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../crud.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+
+import '../crud.dart';
 import '../forms/add-asnmt.dart';
 import '../forms/add-meet.dart';
+import '../screens/main_drawer.dart';
+
 class ShowList extends StatefulWidget {
   @override
   _ShowListState createState() => _ShowListState();
@@ -202,19 +205,23 @@ class _ShowListState extends State<ShowList> {
       centerTitle: true,
       ),
     drawer: MainDrawer(),
-    body:
-    Column(
+    body: Column(
     mainAxisAlignment: MainAxisAlignment.center,
-
       children: <Widget>[
-
-          Container(
-            padding: EdgeInsets.only(left: 90),
-            child: Text("Loading...",
-              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 40),
-              textAlign: TextAlign.center,
-            ),
-          )
+        SpinKitFoldingCube(
+            color: Colors.black,
+            size: 70.0,
+          ),
+        SizedBox(height: 40,),
+        Text(
+          'LOADING...',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            letterSpacing: 10,
+          ),
+        ),
       ]
     ));
   }
