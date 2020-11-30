@@ -146,17 +146,10 @@ class _ShowMeetingState extends State<ShowMeeting> {
     }
     if (meet != null) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text("HOMEWORK MANAGER"),
-          backgroundColor: Colors.black,
-          centerTitle: true,
-        ),
-        drawer: MainDrawer(),
-        body:
-        Column(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
+            /*Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   InkWell(
@@ -181,13 +174,9 @@ class _ShowMeetingState extends State<ShowMeeting> {
                   ),
 
                 ]
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-
+            ),*/
+            SizedBox(height: 20.0,),
             Expanded(
-
               child: ListView.builder(
                 itemCount: meet.docs.length,
                 itemBuilder: (context, index) {
@@ -224,12 +213,12 @@ class _ShowMeetingState extends State<ShowMeeting> {
     }
     else {
       return Scaffold(
-          appBar: AppBar(
+          /*appBar: AppBar(
             title: Text("HOMEWORK MANAGER"),
             backgroundColor: Colors.black,
             centerTitle: true,
           ),
-          drawer: MainDrawer(),
+          drawer: MainDrawer(),*/
           body:
           Column(
               mainAxisAlignment: MainAxisAlignment.center,

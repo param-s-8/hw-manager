@@ -11,32 +11,46 @@ import '../crud.dart';
 import '../forms/add-asnmt.dart';
 import '../forms/add-meet.dart';
 import '../screens/main_drawer.dart';
+import 'show_asnmt.dart';
+import 'show_meeting.dart';
 
 class ShowList extends StatefulWidget {
   @override
   _ShowListState createState() => _ShowListState();
 }
 
-class _ShowListState extends State<ShowList> {
-  Query _ref;
-  QuerySnapshot sub;
-  crudMethods crudObj = new crudMethods();
+class _ShowListState extends State<ShowList> with SingleTickerProviderStateMixin{
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  TabController controller;
+
   @override
   void initState() {
-    // TODO: implement initState
-  crudObj.subject().then((QuerySnapshot results) {
-    setState(() {
-      sub = results;
-    });
-  });
     super.initState();
+    controller = new TabController(length: 2, vsync: this);
+    // TODO: implement initState
+    crudObj.subject().then((QuerySnapshot results) {
+      setState(() {
+        sub = results;
+      });
+    });
 //    _ref = FirebaseFirestore.instance
 //    .collection('subject')
 //    .where('UID',isEqualTo: _auth.currentUser.uid.toString())
 //    .orderBy('Subject');
   }
+
+  @override
+  void dispose(){
+    controller.dispose();
+    super.dispose();
+  }
+
+  Query _ref;
+  QuerySnapshot sub;
+  crudMethods crudObj = new crudMethods();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+
 
   Widget _buildListItem({String Subject, String Professor}){
     return Container(
@@ -127,13 +141,26 @@ class _ShowListState extends State<ShowList> {
           title: Text("HOMEWORK MANAGER"),
           backgroundColor: Colors.black,
           centerTitle: true,
+          bottom: TabBar(
+            controller: controller,
+              tabs: <Tab>[
+                new Tab(text: 'ASSIGNMENTS'),
+                new Tab(text: 'MEETINGS'),
+              ],
+          ),
         ),
         drawer: MainDrawer(),
-        body:
-        Column(
+        body: new TabBarView(
+          controller: controller,
+            children: <Widget>[
+              new ShowAsnmt(),
+              new ShowMeeting(),
+            ],
+        ),
+        /*Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
+            *//*Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   InkWell(
@@ -158,13 +185,9 @@ class _ShowListState extends State<ShowList> {
                   ),
 
                 ]
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-
+            ),*//*
+            SizedBox(height: 30.0,),
             Expanded(
-
               child: ListView.builder(
                 itemCount: sub.docs.length,
                 itemBuilder: (context, index) {
@@ -173,9 +196,9 @@ class _ShowListState extends State<ShowList> {
                   );
                 },),
             ),
-
           ],
-        ),
+        ),*/
+
         floatingActionButton: SpeedDial(
           animatedIcon: AnimatedIcons.add_event,
           backgroundColor: Colors.black,

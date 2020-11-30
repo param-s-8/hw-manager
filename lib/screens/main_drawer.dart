@@ -19,7 +19,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Colors.black54,
+            color: Colors.black,
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -28,53 +28,53 @@ class MainDrawer extends StatelessWidget {
                     height: 100,
                     margin: EdgeInsets.only(top: 30,bottom: 10),
                     decoration: BoxDecoration(
+                      color: Colors.black,
                       shape: BoxShape.circle,
                       image: DecorationImage(image: AssetImage('media/user.jpg'),
                       fit: BoxFit.fill),
-
                     ),
                   ),
                   Text("Name: ${_auth.currentUser.displayName}",
                     style: TextStyle(color: Colors.white) ,),
-                  Text("${_auth.currentUser.email}",
+                  Text("Email: ${_auth.currentUser.email}",
                     style: TextStyle(color: Colors.white) ,),
                 ],
               ),
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Profile'),
+            leading: Icon(Icons.person,color: Colors.black,),
+            title: Text('Profile',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, ProfilePage()),
           ),
           ListTile(
-            leading: Icon(Icons.add),
-            title: Text('Add a meeting'),
+            leading: Icon(Icons.add,color: Colors.black,),
+            title: Text('Add a meeting',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, AddMeet()),
           ),
           ListTile(
-            leading: Icon(Icons.assignment),
-            title: Text('Add a assignment'),
+            leading: Icon(Icons.assignment,color: Colors.black,),
+            title: Text('Add a assignment',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, AddAsnmt()),
           ),
           ListTile(
-            leading: Icon(Icons.assignment),
-            title: Text('Add a subject'),
+            leading: Icon(Icons.assignment,color: Colors.black,),
+            title: Text('Add a subject',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, addSubject()),
           ),
           ListTile(
-            leading: Icon(Icons.book),
-            title: Text('View all Subjects'),
+            leading: Icon(Icons.book,color: Colors.black,),
+            title: Text('View all Subjects',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context,ShowList()),
           ),
           ListTile(
-            leading: Icon(Icons.hourglass_empty),
-            title: Text('Pending Tasks'),
+            leading: Icon(Icons.hourglass_empty,color: Colors.black,),
+            title: Text('Pending Tasks',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, HomePage()),
           ),
           ListTile(
-            leading: Icon(Icons.arrow_back),
-            title: Text('Logout'),
+            leading: Icon(Icons.arrow_back,color: Colors.black,),
+            title: Text('Logout',style: TextStyle(color: Colors.black,),),
             onTap: () {
               _signOut().whenComplete(() {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
