@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../crud.dart';
 import '../screens/home.dart';
@@ -242,7 +243,16 @@ class  AddAsnmtState extends State <AddAsnmt> {
       );
     }
     else{
-      return Container(child: Text("Loading..."));
+      return Scaffold(
+          body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SpinKitFadingCircle(
+                  color: Colors.black,
+                  size: 70.0,
+                ),
+              ]
+          ));
     }
   }
 

@@ -5,9 +5,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ui/firestore_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import '../crud.dart';
 import '../screens/main_drawer.dart';
+import '../forms/add-asnmt.dart';
+import '../forms/add-meet.dart';
 
 
 class ShowAsnmt extends StatefulWidget {
@@ -136,6 +139,11 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
 
   @override
   Widget build(BuildContext context) {
+    void _pushPage(BuildContext context, Widget page) {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => page),
+      );
+    }
     if (ast != null) {
       return Scaffold(
         appBar: AppBar(
@@ -193,11 +201,24 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
 
           ],
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-
-        },
-          backgroundColor: Colors.black,
-          child: Icon(Icons.add, color: Colors.white,),),
+        floatingActionButton: SpeedDial(
+            animatedIcon: AnimatedIcons.add_event,
+            backgroundColor: Colors.black,
+            children: [
+              SpeedDialChild(
+                child:  Icon(Icons.assignment,color: Colors.white,),
+                backgroundColor: Colors.black,
+                label: "Add Assignment",
+                onTap: ()=>  _pushPage(context, AddAsnmt()) ,
+              ),
+              SpeedDialChild(
+                child:  Icon(Icons.camera_alt,color: Colors.white,),
+                backgroundColor: Colors.black,
+                label: "Add Meeting",
+                onTap: () => _pushPage(context, AddMeet()),
+              ),
+            ],
+          ),
 
       );
     }

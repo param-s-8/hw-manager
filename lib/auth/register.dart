@@ -208,8 +208,8 @@ class _RegisterState extends State<Register> {
       });
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => MainPage(
-                user: user1,
-              )));
+            user: user1,
+          )));
     } else {
       print("User not registered");
     }
