@@ -50,6 +50,11 @@ class crudMethods {
         .collection('subject').where('UID',isEqualTo: _auth.currentUser.uid.toString()).orderBy('Subject').get();
   }
 
+  Future<QuerySnapshot> ssubject() async {
+    return await FirebaseFirestore.instance
+        .collection('subject').where('UID',isEqualTo: _auth.currentUser.uid.toString()).orderBy('Subject').get();
+  }
+
   Future<QuerySnapshot> meeting() async {
     return await FirebaseFirestore.instance
         .collection('meeting').where('UID',isEqualTo: _auth.currentUser.uid.toString()).orderBy('Time').get();

@@ -14,9 +14,9 @@ class AddAsnmt extends StatefulWidget {
 
 
 class  AddAsnmtState extends State <AddAsnmt> {
-  QuerySnapshot sub;
+  List<QueryDocumentSnapshot> sub;
   crudMethods crudObj = new crudMethods();
-  List _subjName;
+  Map _subjName;
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime _dateTime;
@@ -31,14 +31,18 @@ class  AddAsnmtState extends State <AddAsnmt> {
     _time = TimeOfDay.now();
     crudObj.subject().then((QuerySnapshot results) {
       setState(() {
-        sub = results;
+        sub = results.docs.toList();
+        print(results.docs.toList().length);
+        results.docs.forEach((element) {
+          _subjName.add(element["Subject"]);
+          print(element["Subject"]);
+        });
+        
       });
+      print("Subject: ${sub[0].get("Subject")}");
+
     });
 
-    for(int i=0;i<sub.docs.length;i++)
-      {
-        _subjName.add(sub.docs[i].get('Subject'));
-      }
   }
 
   Future<Null> selectTime(BuildContext context) async{

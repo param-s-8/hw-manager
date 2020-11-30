@@ -26,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         user = results;
       });
+      print(user);
     });
     super.initState();
   }
@@ -262,7 +263,7 @@ void _update() async {
     crudObj.updateData(user,{
       'UID': _auth.currentUser.uid,
       'Name': _displayName.text,
-      'Email': user.docs[0].get('Email'),
+      'Email': user.docs[1].get('Email'),
       'Password': _passwordController.text,
       'College': _collegeController.text,
       'Total Subjects': _subjectController.text
