@@ -146,17 +146,16 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
     }
     if (ast != null) {
       return Scaffold(
-        appBar: AppBar(
+        /*appBar: AppBar(
           title: Text("HOMEWORK MANAGER"),
           backgroundColor: Colors.black,
           centerTitle: true,
-        ),
-        drawer: MainDrawer(),
+        ),*/
         body:
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
+            /*Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   InkWell(
@@ -181,10 +180,8 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                   ),
 
                 ]
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
+            ),*/
+            SizedBox(height: 20.0,),
 
             Expanded(
 
@@ -224,12 +221,12 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
     }
     else {
       return Scaffold(
-          appBar: AppBar(
+          /*appBar: AppBar(
             title: Text("HOMEWORK MANAGER"),
             backgroundColor: Colors.black,
             centerTitle: true,
           ),
-          drawer: MainDrawer(),
+          drawer: MainDrawer(),*/
           body:
           Column(
               mainAxisAlignment: MainAxisAlignment.center,
