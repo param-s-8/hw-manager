@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         user = results;
       });
-      print(user);
+      user.docs.forEach((element) {print(element.get("Name"));});
     });
     super.initState();
   }
@@ -64,7 +64,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
   Widget _textFormField()
   {
-    return Material(
+    user.docs.forEach((element) {
+      return Material(
 
       elevation: 4,
       shadowColor: Colors.grey,
@@ -74,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         children: <Widget>[
         TextFormField(
-          initialValue: '${user.docs[0].get('Name')}',
+          initialValue: '${element.get("Name")}',
           controller: _displayName,
           decoration: InputDecoration(
               focusedBorder: InputBorder.none,
@@ -93,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
               fillColor: Colors.white30),
         ),
           TextFormField(
-            initialValue: '${user.docs[0].get('Email')}',
+            initialValue: '${element.get("Email")}',
             decoration: InputDecoration(
                 focusedBorder: InputBorder.none,
                 border: OutlineInputBorder(
@@ -111,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 fillColor: Colors.white30),
           ),
           TextFormField(
-            initialValue: '${user.docs[0].get('Password')}',
+            initialValue: '${element.get("Password")}',
             controller: _passwordController,
             decoration: InputDecoration(
                 focusedBorder: InputBorder.none,
@@ -130,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 fillColor: Colors.white30),
           ),
           TextFormField(
-            initialValue: '${user.docs[0].get('College')}',
+            initialValue: '${element.get("College")}',
             controller: _collegeController,
             decoration: InputDecoration(
                 focusedBorder: InputBorder.none,
@@ -149,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 fillColor: Colors.white30),
           ),
           TextFormField(
-            initialValue: '${user.docs[0].get('Total Subject')}',
+            initialValue: '${element.get("Total Subjects")}',
             controller: _subjectController,
             decoration: InputDecoration(
                 focusedBorder: InputBorder.none,
@@ -171,6 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
     ],
       )
     );
+  });
   }
 
   Widget _textFormFieldCalling(){
@@ -263,7 +265,7 @@ void _update() async {
     crudObj.updateData(user,{
       'UID': _auth.currentUser.uid,
       'Name': _displayName.text,
-      'Email': user.docs[1].get('Email'),
+      'Email': user,
       'Password': _passwordController.text,
       'College': _collegeController.text,
       'Total Subjects': _subjectController.text
