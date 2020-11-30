@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'signIn.dart';
 
 
 import '../crud.dart';
@@ -25,7 +26,7 @@ class _RegisterState extends State<Register> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _collegeController = TextEditingController();
-  double _boxh = 10;
+  double _boxh = 20;
 
   crudMethods crudObj = new crudMethods();
 
@@ -186,7 +187,7 @@ class _RegisterState extends State<Register> {
                           Container(
                             child: RaisedButton(
                               elevation: 5,
-                              onPressed: () => print('Login pressed'),
+                              onPressed: () => _pushPage(context,SignIn()),
                               padding: EdgeInsets.all(15),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)
@@ -305,5 +306,10 @@ class _RegisterState extends State<Register> {
     }
 
     return null;
+  }
+  void _pushPage(BuildContext context, Widget page) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => page),
+    );
   }
 }
