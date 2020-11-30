@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hw_manager/screens/home.dart';
+import '../crud.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -9,6 +12,24 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  QuerySnapshot user;
+  crudMethods crudObj = new crudMethods();
+
+  final TextEditingController _displayName = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _subjectController = TextEditingController();
+  final TextEditingController _collegeController = TextEditingController();
+
+  void initState() {
+    // TODO: implement initState
+    crudObj.user().then((QuerySnapshot results) {
+      setState(() {
+        user = results;
+      });
+    });
+    super.initState();
+  }
+
   Widget _profileText(){
     return Padding(
         padding: EdgeInsets.all(5),
@@ -40,33 +61,114 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-  Widget _textFormField({
-    String hintText,
-    IconData icon,
-  }) {
+  Widget _textFormField()
+  {
     return Material(
+
       elevation: 4,
       shadowColor: Colors.grey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10,),
       ),
-      child: TextField(
-        decoration: InputDecoration(
-            focusedBorder: InputBorder.none,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            prefixIcon: Icon(icon,color: Colors.black),
-            hintText: hintText,
-            hintStyle: TextStyle(
-              letterSpacing: 2,
-              color: Colors.black26,
-              fontWeight: FontWeight.bold,
-            ),
-            filled: true,
-            fillColor: Colors.white30),
-      ),
+      child: Column(
+        children: <Widget>[
+        TextFormField(
+          initialValue: '${user.docs[0].get('Name')}',
+          controller: _displayName,
+          decoration: InputDecoration(
+              focusedBorder: InputBorder.none,
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              prefixIcon: Icon(Icons.person,color: Colors.black),
+              hintText: 'Full Name',
+              hintStyle: TextStyle(
+                letterSpacing: 2,
+                color: Colors.black26,
+                fontWeight: FontWeight.bold,
+              ),
+              filled: true,
+              fillColor: Colors.white30),
+        ),
+          TextFormField(
+            initialValue: '${user.docs[0].get('Email')}',
+            decoration: InputDecoration(
+                focusedBorder: InputBorder.none,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                prefixIcon: Icon(Icons.email,color: Colors.black),
+                hintText: 'Email',
+                hintStyle: TextStyle(
+                  letterSpacing: 2,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.bold,
+                ),
+                filled: true,
+                fillColor: Colors.white30),
+          ),
+          TextFormField(
+            initialValue: '${user.docs[0].get('Password')}',
+            controller: _passwordController,
+            decoration: InputDecoration(
+                focusedBorder: InputBorder.none,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                prefixIcon: Icon(Icons.lock,color: Colors.black),
+                hintText: 'Password',
+                hintStyle: TextStyle(
+                  letterSpacing: 2,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.bold,
+                ),
+                filled: true,
+                fillColor: Colors.white30),
+          ),
+          TextFormField(
+            initialValue: '${user.docs[0].get('College')}',
+            controller: _collegeController,
+            decoration: InputDecoration(
+                focusedBorder: InputBorder.none,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                prefixIcon: Icon(Icons.school,color: Colors.black),
+                hintText: 'College Name',
+                hintStyle: TextStyle(
+                  letterSpacing: 2,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.bold,
+                ),
+                filled: true,
+                fillColor: Colors.white30),
+          ),
+          TextFormField(
+            initialValue: '${user.docs[0].get('Total Subject')}',
+            controller: _subjectController,
+            decoration: InputDecoration(
+                focusedBorder: InputBorder.none,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                prefixIcon: Icon(Icons.library_books,color: Colors.black),
+                hintText: 'Number of Subjects',
+                hintStyle: TextStyle(
+                  letterSpacing: 2,
+                  color: Colors.black26,
+                  fontWeight: FontWeight.bold,
+                ),
+                filled: true,
+                fillColor: Colors.white30),
+          ),
+
+    ],
+      )
     );
   }
 
@@ -78,16 +180,14 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: '${_auth.currentUser.displayName}', icon: Icons.person,)),
-            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: '${_auth.currentUser.email}', icon: Icons.mail,)),
-            Container(margin: EdgeInsets.symmetric(horizontal: 30,vertical:5),child: _textFormField(hintText: '${_auth.currentUser.uid}', icon: Icons.school,)),
+            _textFormField(),
             Container(
               padding: EdgeInsets.symmetric(vertical: 5),
               width: double.infinity,
               margin: EdgeInsets.only(right: 150,left: 150),
               child: RaisedButton(
                 elevation: 5,
-                onPressed: () => print('Details updated'),
+                onPressed: () => _update(),
                 padding: EdgeInsets.all(15),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)
@@ -155,6 +255,25 @@ class _ProfilePageState extends State<ProfilePage> {
         },
       ),
     );
+  }
+
+void _update() async {
+    _auth.currentUser.updatePassword(_passwordController.text) ;
+    crudObj.updateData(user,{
+      'UID': _auth.currentUser.uid,
+      'Name': _displayName.text,
+      'Email': user.docs[0].get('Email'),
+      'Password': _passwordController.text,
+      'College': _collegeController.text,
+      'Total Subjects': _subjectController.text
+    }).then((result) {
+      print("User Updated");
+    }).catchError((e) {
+      print("Error: $e");
+    });
+
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => HomePage()));
   }
 }
 class HeaderCurvedContainer extends CustomPainter{

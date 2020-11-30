@@ -60,6 +60,12 @@ class crudMethods {
         .collection('assignment').where('UID',isEqualTo: _auth.currentUser.uid.toString()).orderBy('Time').get();
   }
 
+  Future<QuerySnapshot> user() async {
+    return await FirebaseFirestore.instance
+        .collection('users').where('UID',isEqualTo: _auth.currentUser.uid.toString()).get();
+  }
+
+
   Future<void> addAssignment(assignment) {
     return FirebaseFirestore.instance
         .collection('assignment')

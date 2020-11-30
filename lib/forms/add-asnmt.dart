@@ -4,18 +4,18 @@ import 'package:intl/intl.dart';
 import '../crud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../screens/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddAsnmt extends StatefulWidget {
   @override
    AddAsnmtState createState() =>  AddAsnmtState();
 }
 
-crudMethods crudObj = new crudMethods();
 
 class  AddAsnmtState extends State <AddAsnmt> {
-  List _subjName = [
-    'AI', 'OS', 'TOC', 'INS'
-  ];
+  QuerySnapshot sub;
+  crudMethods crudObj = new crudMethods();
+  List _subjName;
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime _dateTime;
@@ -28,6 +28,16 @@ class  AddAsnmtState extends State <AddAsnmt> {
   void initState() {
     super.initState();
     _time = TimeOfDay.now();
+    crudObj.subject().then((QuerySnapshot results) {
+      setState(() {
+        sub = results;
+      });
+    });
+
+    for(int i=0;i<sub.docs.length;i++)
+      {
+        _subjName.add(sub.docs[i].get('Subject'));
+      }
   }
 
   Future<Null> selectTime(BuildContext context) async{
