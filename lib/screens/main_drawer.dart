@@ -8,6 +8,7 @@ import '../forms/add-meet.dart';
 import '../forms/addSubjects.dart';
 import 'user_profile.dart';
 import 'home.dart';
+import 'view_subjects.dart';
 
 class MainDrawer extends StatelessWidget {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -65,7 +66,7 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.book,color: Colors.black,),
             title: Text('View all Subjects',style: TextStyle(color: Colors.black,),),
-            onTap: () => _pushPage(context,ShowList()),
+            onTap: () => _pushPage(context,ShowSub()),
           ),
           ListTile(
             leading: Icon(Icons.hourglass_empty,color: Colors.black,),

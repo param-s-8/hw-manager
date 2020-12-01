@@ -55,19 +55,15 @@ class _ShowListState extends State<ShowList> with SingleTickerProviderStateMixin
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 2.0),
       child: Card(
-
         elevation: 5.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
-
         ),
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.deepOrange),
             borderRadius: BorderRadius.circular(30.0),
-
           ),
-
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 25.0),
           child: Row(
@@ -76,10 +72,8 @@ class _ShowListState extends State<ShowList> with SingleTickerProviderStateMixin
             children: <Widget>[
               Container(
                 height: 150.0,
-
                 child: Column(
                   children: <Widget>[
-
                     SizedBox(height: 10.0,),
                     Padding(padding:EdgeInsets.symmetric(horizontal: 2.0) ,
                       child: Container(
@@ -96,7 +90,6 @@ class _ShowListState extends State<ShowList> with SingleTickerProviderStateMixin
                         children: <Widget>[
                           Icon(Icons.book),
                           SizedBox(width: 10.0,),
-
                           Text(Subject),
                         ],
                       ),
@@ -113,8 +106,6 @@ class _ShowListState extends State<ShowList> with SingleTickerProviderStateMixin
                         ],
                       ),
                     ),
-
-
                   ],
                 ),
               )
@@ -155,48 +146,6 @@ class _ShowListState extends State<ShowList> with SingleTickerProviderStateMixin
               new ShowMeeting(),
             ],
         ),
-        /*Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            *//*Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  InkWell(
-                    child: Container(
-                      color: Colors.black54,
-                      child: Text("TODAY",),
-                      width: 210,
-                      height: 50,
-                      padding: EdgeInsets.fromLTRB(85.0, 15.0, 20.0, 5.0),
-                    ),
-                    onTap: () {},
-                  ),
-                  InkWell(
-                    child: Container(
-                      color: Colors.black54,
-                      child: Text("FUTURE"),
-                      width: 200,
-                      height: 50,
-                      padding: EdgeInsets.fromLTRB(80.0, 15.0, 10.0, 5.0),
-                    ),
-                    onTap: () {},
-                  ),
-
-                ]
-            ),*//*
-            SizedBox(height: 30.0,),
-            Expanded(
-              child: ListView.builder(
-                itemCount: sub.docs.length,
-                itemBuilder: (context, index) {
-                  return _buildListItem(Subject: sub.docs[index].get('Subject'),
-                      Professor: sub.docs[index].get('Professor')
-                  );
-                },),
-            ),
-          ],
-        ),*/
-
         floatingActionButton: SpeedDial(
           animatedIcon: AnimatedIcons.add_event,
           backgroundColor: Colors.black,

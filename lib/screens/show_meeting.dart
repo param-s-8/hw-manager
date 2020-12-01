@@ -41,19 +41,15 @@ class _ShowMeetingState extends State<ShowMeeting> {
 
   Widget _buildListItem({String Subject, String Date, String Time, String Title}){
     return Card(
-
             elevation: 5.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
-
             ),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.deepOrange),
                 borderRadius: BorderRadius.circular(30.0),
-
               ),
-
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 25.0),
               child: Row(
@@ -62,21 +58,15 @@ class _ShowMeetingState extends State<ShowMeeting> {
                 children: <Widget>[
                   Container(
                     height: 150.0,
-
                     child: Column(
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-
                           children: <Widget>[
-
                             Text("Date: ${Date}"),
                             SizedBox(width: 120.0,),
                             Text("Time: ${Time}"),
-
-
-
                           ],
                         ),
                         SizedBox(height: 10.0,),
@@ -123,17 +113,13 @@ class _ShowMeetingState extends State<ShowMeeting> {
                             ],
                           ),
                         ),
-
                       ],
                     ),
-
-
                   )
                 ],
               ),
             ),
           );
-
   }
 
 
@@ -149,32 +135,6 @@ class _ShowMeetingState extends State<ShowMeeting> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /*Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  InkWell(
-                    child: Container(
-                      color: Colors.black54,
-                      child: Text("TODAY",),
-                      width: 210,
-                      height: 50,
-                      padding: EdgeInsets.fromLTRB(85.0, 15.0, 20.0, 5.0),
-                    ),
-                    onTap: () {},
-                  ),
-                  InkWell(
-                    child: Container(
-                      color: Colors.black54,
-                      child: Text("FUTURE"),
-                      width: 200,
-                      height: 50,
-                      padding: EdgeInsets.fromLTRB(80.0, 15.0, 10.0, 5.0),
-                    ),
-                    onTap: () {},
-                  ),
-
-                ]
-            ),*/
             SizedBox(height: 20.0,),
             Expanded(
               child: ListView.builder(
@@ -187,7 +147,6 @@ class _ShowMeetingState extends State<ShowMeeting> {
                   );
                 },),
             ),
-
           ],
         ),
         floatingActionButton: SpeedDial(
@@ -208,17 +167,10 @@ class _ShowMeetingState extends State<ShowMeeting> {
             ),
           ],
         ),
-
       );
     }
     else {
       return Scaffold(
-          /*appBar: AppBar(
-            title: Text("HOMEWORK MANAGER"),
-            backgroundColor: Colors.black,
-            centerTitle: true,
-          ),
-          drawer: MainDrawer(),*/
           body:
           Column(
               mainAxisAlignment: MainAxisAlignment.center,

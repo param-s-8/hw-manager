@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hw_manager/screens/home.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../crud.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -47,17 +48,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _profileText(){
-    return Padding(
-        padding: EdgeInsets.all(5),
-        child: Text(
-          'PROFILE',
-          style: TextStyle(
-            fontSize: 30,
-            letterSpacing: 1.5,
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
-        )
+    return Text(
+      'PROFILE',
+      style: TextStyle(
+        fontSize: 30,
+        letterSpacing: 1.5,
+        color: Colors.black,
+        fontWeight: FontWeight.w600,
+      ),
     );
   }
 
@@ -81,16 +79,16 @@ class _ProfilePageState extends State<ProfilePage> {
   {
     if(user!=null) {
         return Material(
-
-            elevation: 4,
-            shadowColor: Colors.grey,
-            shape: RoundedRectangleBorder(
+            //elevation: 4,
+            //shadowColor: Colors.grey,
+            /*shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10,),
-            ),
+            ),*/
             child: Form(
               key: _formKey,
               child: Column(
                 children: <Widget>[
+                  SizedBox(height: 15,),
                   TextFormField(
                     controller: _displayName,
                     decoration: InputDecoration(
@@ -109,6 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         filled: true,
                         fillColor: Colors.white30),
                   ),
+                  SizedBox(height: 15,),
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -127,6 +126,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         filled: true,
                         fillColor: Colors.white30),
                   ),
+                  SizedBox(height: 15,),
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
@@ -145,6 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         filled: true,
                         fillColor: Colors.white30),
                   ),
+                  SizedBox(height: 15,),
                   TextFormField(
                     controller: _collegeController,
                     decoration: InputDecoration(
@@ -163,8 +164,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         filled: true,
                         fillColor: Colors.white30),
                   ),
+                  SizedBox(height: 15,),
                   TextFormField(
-
                     controller: _subjectController,
                     decoration: InputDecoration(
                         focusedBorder: InputBorder.none,
@@ -189,21 +190,39 @@ class _ProfilePageState extends State<ProfilePage> {
             )
         );
     }else{
-      return Container(
-        child: Text("Loading"),
-      );
+      return Scaffold(
+          body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SpinKitFoldingCube(
+                  color: Colors.black,
+                  size: 70.0,
+                ),
+                SizedBox(height: 40,),
+                Text(
+                  'LOADING...',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    letterSpacing: 10,
+                  ),
+                ),
+              ]
+          ));
     }
   }
 
   Widget _textFormFieldCalling(){
     return Container(
-        height: 500,
+        //height:445,
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             _textFormField(),
+            SizedBox(height: 15,),
             Container(
               padding: EdgeInsets.symmetric(vertical: 5),
               width: double.infinity,
@@ -238,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: (){},
+          onPressed: ()=>Navigator.pop(context),
         ),
       ),
       body: DraggableScrollableSheet(
@@ -257,7 +276,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: MediaQuery.of(context).size.height,
                   ),
                   painter: HeaderCurvedContainer(),
-
                 ),
                 Expanded(
                   child: Column(

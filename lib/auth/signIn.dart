@@ -157,8 +157,8 @@ class _SignInState extends State<SignIn> {
                                             prefixIcon: Icon(Icons.lock,color: Colors.black,),
                                             suffixIcon: IconButton(
                                               icon: Icon(
-                                                _passwordVisible?Icons.visibility:Icons.visibility_off,
-                                                color:Theme.of(context).primaryColorDark,
+                                                _passwordVisible? Icons.visibility:Icons.visibility_off,
+                                                color: Colors.black,
                                               ),
                                               onPressed: (){
                                                 setState(() {

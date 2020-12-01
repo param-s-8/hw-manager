@@ -22,7 +22,6 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
   Query _ref;
   QuerySnapshot ast;
   crudMethods crudObj = new crudMethods();
-
   FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void initState() {
@@ -39,106 +38,99 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
 //    .orderBy('Subject');
   }
 
-  Widget _buildListItem({String Subject, String Date, String Time, String Title}){
-    return Card(
-
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-
+  Widget _buildListItem({String Subject, String Date, String Time, String Title, int Index, Item}){
+    return Dismissible(
+      key: Key(Index.toString()),
+      onDismissed: (direction){
+          Item.removeAt(Index);
+          ast.docs.removeAt(Index);
+      },
+      background: Container(
+        color: Colors.red,
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.deepOrange),
+      child: Card(
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
-
         ),
-
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 25.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              height: 150.0,
-
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    children: <Widget>[
-
-                      Text("Date: ${Date}"),
-                      SizedBox(width: 100.0,),
-                      Text("Time: ${Time}"),
-
-
-
-                    ],
-                  ),
-                  SizedBox(height: 10.0,),
-                  Padding(padding:EdgeInsets.symmetric(horizontal: 20.0) ,
-                    child: Container(
-                      height: 1.0,
-                      width: 304.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(height: 15.00,),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
-                    child: Row(
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.deepOrange),
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(vertical: 25.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                height: 150.0,
+                child: Column(
+                  children: <Widget>[
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Icon(Icons.book),
-                        SizedBox(width: 10.0,),
-
-                        Text("${Subject}"),
+                        Text("Date: ${Date}"),
+                        SizedBox(width: 100.0,),
+                        Text("Time: ${Time}"),
                       ],
                     ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(Icons.home),
-                        SizedBox(width: 10.0,),
-                        Text("${Title}"),
-                      ],
+                    SizedBox(height: 10.0,),
+                    Padding(padding:EdgeInsets.symmetric(horizontal: 20.0) ,
+                      child: Container(
+                        height: 1.0,
+                        width: 304.0,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(Icons.person),
-                        SizedBox(width: 10.0,),
-                        Text("Prof. Anooja Joy"),
-                      ],
+                    SizedBox(height: 15.00,),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(Icons.book),
+                          SizedBox(width: 10.0,),
+                          Text("${Subject}"),
+                        ],
+                      ),
                     ),
-                  ),
-
-                ],
-              ),
-
-
-            )
-          ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(Icons.home),
+                          SizedBox(width: 10.0,),
+                          Text("${Title}"),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(Icons.person),
+                          SizedBox(width: 10.0,),
+                          Text("Anooja"),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -149,56 +141,25 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
     }
     if (ast != null) {
       return Scaffold(
-        /*appBar: AppBar(
-          title: Text("HOMEWORK MANAGER"),
-          backgroundColor: Colors.black,
-          centerTitle: true,
-        ),*/
         body:
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /*Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  InkWell(
-                    child: Container(
-                      color: Colors.black54,
-                      child: Text("TODAY",),
-                      width: 210,
-                      height: 50,
-                      padding: EdgeInsets.fromLTRB(85.0, 15.0, 20.0, 5.0),
-                    ),
-                    onTap: () {},
-                  ),
-                  InkWell(
-                    child: Container(
-                      color: Colors.black54,
-                      child: Text("FUTURE"),
-                      width: 200,
-                      height: 50,
-                      padding: EdgeInsets.fromLTRB(80.0, 15.0, 10.0, 5.0),
-                    ),
-                    onTap: () {},
-                  ),
-
-                ]
-            ),*/
             SizedBox(height: 20.0,),
-
             Expanded(
-
               child: ListView.builder(
                 itemCount: ast.docs.length,
                 itemBuilder: (context, index) {
-                  return _buildListItem(Subject: ast.docs[index].get('Subject'),
+                  return _buildListItem(
+                    Subject: ast.docs[index].get('Subject'),
                     Date: ast.docs[index].get('Date'),
                     Time: ast.docs[index].get('Time').substring(10,ast.docs[index].get('Time').length -1),
                     Title: ast.docs[index].get('Title'),
+                    Index: index,
+                    Item: ast.docs,
                   );
                 },),
             ),
-
           ],
         ),
         floatingActionButton: SpeedDial(
@@ -224,14 +185,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
     }
     else {
       return Scaffold(
-          /*appBar: AppBar(
-            title: Text("HOMEWORK MANAGER"),
-            backgroundColor: Colors.black,
-            centerTitle: true,
-          ),
-          drawer: MainDrawer(),*/
-          body:
-          Column(
+          body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SpinKitFoldingCube(
