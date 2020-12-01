@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ui/firestore_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-
+import 'package:intl/intl.dart';
 import '../crud.dart';
 import '../screens/main_drawer.dart';
 import '../forms/add-asnmt.dart';
@@ -182,7 +182,7 @@ class _ShowMeetingState extends State<ShowMeeting> {
                 itemBuilder: (context, index) {
                   return _buildListItem(Subject: meet.docs[index].get('Subject'),
                       Date: meet.docs[index].get('Date'),
-                    Time: meet.docs[index].get('Time'),
+                    Time: meet.docs[index].get('Time').substring(10,meet.docs[index].get('Time').length -1),
                     Title: meet.docs[index].get('Title'),
                   );
                 },),

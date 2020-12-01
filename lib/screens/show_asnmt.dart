@@ -190,7 +190,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                 itemBuilder: (context, index) {
                   return _buildListItem(Subject: ast.docs[index].get('Subject'),
                     Date: ast.docs[index].get('Date'),
-                    Time: ast.docs[index].get('Time'),
+                    Time: ast.docs[index].get('Time').substring(10,ast.docs[index].get('Time').length -1),
                     Title: ast.docs[index].get('Title'),
                   );
                 },),

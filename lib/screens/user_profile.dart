@@ -78,7 +78,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _textFormField()
   {
     if(user!=null) {
-      user.docs.forEach((element) {
         return Material(
 
             elevation: 4,
@@ -187,8 +186,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             )
         );
-      }
-      );
     }else{
       return Container(
         child: Text("Loading"),
@@ -258,6 +255,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: MediaQuery.of(context).size.height,
                   ),
                   painter: HeaderCurvedContainer(),
+
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -265,7 +263,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     _profileText(),
                     _circleAvatar(),
                     _textFormFieldCalling(),
-                  ].where((child) => child!=null).toList(),
+                  ],
                 ),
               ],
             ),
