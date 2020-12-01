@@ -15,6 +15,7 @@ class _ProfilePageState extends State<ProfilePage> {
   QuerySnapshot user;
   crudMethods crudObj = new crudMethods();
 
+  String id;
   TextEditingController _displayName = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _subjectController = TextEditingController();
@@ -32,6 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
         print(element.get("Name"));
         print(element.get("Password"));
         print(element.get("Total Subjects"));
+        id = element.id;
         _displayName = TextEditingController(text: element.get("Name"));
         _passwordController = TextEditingController(text: element.get("Password"));
         _subjectController = TextEditingController(text: element.get("Total Subjects"));
@@ -195,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _textFormFieldCalling(){
     return Container(
-        height: 300,
+        height: 500,
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -205,7 +207,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 5),
               width: double.infinity,
-              margin: EdgeInsets.only(right: 150,left: 150),
+              margin: EdgeInsets.only(right: 100,left: 100),
               child: RaisedButton(
                 elevation: 5,
                 onPressed: () => _update(),
@@ -257,13 +259,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   painter: HeaderCurvedContainer(),
 
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    _profileText(),
-                    _circleAvatar(),
-                    _textFormFieldCalling(),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      _profileText(),
+                      _circleAvatar(),
+                      _textFormFieldCalling(),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -274,11 +278,12 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
 void _update() async {
+    Navigator.of(context).pop();
     _auth.currentUser.updatePassword(_passwordController.text) ;
-    crudObj.updateData(user,{
+    crudObj.updateData(id,{
       'UID': _auth.currentUser.uid,
       'Name': _displayName.text,
-      'Email': user,
+      'Email': _auth.currentUser.email,
       'Password': _passwordController.text,
       'College': _collegeController.text,
       'Total Subjects': _subjectController.text

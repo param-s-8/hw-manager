@@ -55,7 +55,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
         ),
 
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 25.0),
+        padding: EdgeInsets.symmetric(vertical: 25.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +72,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                     children: <Widget>[
 
                       Text("Date: ${Date}"),
-                      SizedBox(width: 120.0,),
+                      SizedBox(width: 100.0,),
                       Text("Time: ${Time}"),
 
 
@@ -80,18 +80,19 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                     ],
                   ),
                   SizedBox(height: 10.0,),
-                  Padding(padding:EdgeInsets.symmetric(horizontal: 2.0) ,
+                  Padding(padding:EdgeInsets.symmetric(horizontal: 20.0) ,
                     child: Container(
                       height: 1.0,
-                      width: 340.0,
+                      width: 304.0,
                       color: Colors.black,
                     ),
                   ),
                   SizedBox(height: 15.00,),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,200.0,10.0),
+                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Icon(Icons.book),
                         SizedBox(width: 10.0,),
@@ -102,9 +103,10 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,212.0,10.0),
+                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Icon(Icons.home),
                         SizedBox(width: 10.0,),
@@ -113,9 +115,10 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,200.0,10.0),
+                    padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Icon(Icons.person),
                         SizedBox(width: 10.0,),
