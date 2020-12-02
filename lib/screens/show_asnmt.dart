@@ -38,12 +38,11 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
 //    .orderBy('Subject');
   }
 
-  Widget _buildListItem({String Subject, String Date, String Time, String Title, int Index, Item}){
+  Widget _buildListItem({String Subject, String Date, String Time, String Title, String Index, Item}){
     return Dismissible(
-      key: Key(Index.toString()),
+      key: Key(Index),
       onDismissed: (direction){
-          Item.removeAt(Index);
-          ast.docs.removeAt(Index);
+          crudObj.deleteA(Index);
       },
       background: Container(
         color: Colors.red,
@@ -155,7 +154,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                     Date: ast.docs[index].get('Date'),
                     Time: ast.docs[index].get('Time').substring(10,ast.docs[index].get('Time').length -1),
                     Title: ast.docs[index].get('Title'),
-                    Index: index,
+                    Index: ast.docs[index].id,
                     Item: ast.docs,
                   );
                 },),

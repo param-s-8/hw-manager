@@ -106,4 +106,8 @@ class crudMethods {
       print(e);
     });
   }
+
+  deleteA(docId) {
+    return FirebaseFirestore.instance.collection('assignment').doc(docId).delete().catchError((e) => print(e));
+  }
 }
