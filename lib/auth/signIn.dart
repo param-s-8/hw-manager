@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'package:hw_manager/screens/showlist.dart';
 import '../screens/home.dart';
 
 class SignIn extends StatefulWidget {
@@ -277,7 +278,7 @@ class _SignInState extends State<SignIn> {
         await user.sendEmailVerification();
       }
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-        return HomePage();
+        return ShowList();
       }));
     } catch (e) {
       Scaffold.of(context).showSnackBar(SnackBar(

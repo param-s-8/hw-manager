@@ -1,4 +1,4 @@
-import '../mainPage.dart';
+import '../screens/showlist.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -274,9 +274,8 @@ class _RegisterState extends State<Register> {
         print("Error: $e");
       });
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MainPage(
-            user: user1,
-          )));
+          builder: (context) => ShowList()
+      ));
     } else {
       print("User not registered");
     }
