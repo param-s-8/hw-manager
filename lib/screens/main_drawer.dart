@@ -49,34 +49,34 @@ class MainDrawer extends StatelessWidget {
             onTap: () => _pushPage(context, ProfilePage()),
           ),
           ListTile(
-            leading: Icon(Icons.hourglass_empty,color: Colors.black,),
+            leading: Icon(Icons.home,color: Colors.black,),
             title: Text('Home Page',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, ShowList()),
           ),
           ListTile(
             leading: Icon(Icons.add,color: Colors.black,),
-            title: Text('Add a meeting',style: TextStyle(color: Colors.black,),),
+            title: Text('Add Meeting',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, AddMeet()),
           ),
           ListTile(
             leading: Icon(Icons.assignment,color: Colors.black,),
-            title: Text('Add a assignment',style: TextStyle(color: Colors.black,),),
+            title: Text('Add Assignment',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, AddAsnmt()),
           ),
           ListTile(
             leading: Icon(Icons.assignment,color: Colors.black,),
-            title: Text('Add a subject',style: TextStyle(color: Colors.black,),),
+            title: Text('Add Subject',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, addSubject()),
           ),
           ListTile(
             leading: Icon(Icons.book,color: Colors.black,),
-            title: Text('View all Subjects',style: TextStyle(color: Colors.black,),),
+            title: Text('View All Subjects',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context,ShowSub()),
           ),
 
           ListTile(
             leading: Icon(Icons.arrow_back,color: Colors.black,),
-            title: Text('Logout',style: TextStyle(color: Colors.black,),),
+            title: Text('Log Out',style: TextStyle(color: Colors.black,),),
             onTap: () {
               _signOut().whenComplete(() {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(

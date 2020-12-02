@@ -48,6 +48,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
         color: Colors.red,
       ),
       child: Card(
+        margin: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
         elevation: 5.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -58,7 +59,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
             borderRadius: BorderRadius.circular(30.0),
           ),
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(vertical: 25.0),
+          padding: EdgeInsets.symmetric(vertical: 15.0,horizontal: 25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +95,6 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                       padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-
                         children: <Widget>[
                           Icon(Icons.book),
                           SizedBox(width: 10.0,),
@@ -115,7 +115,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
+                      padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,1.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,

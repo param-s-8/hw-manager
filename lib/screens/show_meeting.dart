@@ -39,7 +39,7 @@ class _ShowMeetingState extends State<ShowMeeting> {
 //    .orderBy('Subject');
   }
 
-  Widget _buildListItem({String Subject, String Date, String Time, String Title, String Index}){
+  Widget _buildListItem({String Subject, String Prof, String Date, String Time, String Title, String Index}){
     return Dismissible(
       key: Key(Index),
       onDismissed: (direction){
@@ -49,6 +49,7 @@ class _ShowMeetingState extends State<ShowMeeting> {
         color: Colors.red,
       ),
       child: Card(
+              margin: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
@@ -59,7 +60,7 @@ class _ShowMeetingState extends State<ShowMeeting> {
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(vertical: 25.0),
+                padding: EdgeInsets.symmetric(vertical: 15.0,horizontal: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,13 +118,13 @@ class _ShowMeetingState extends State<ShowMeeting> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
+                            padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,1.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 Icon(Icons.person),
                                 SizedBox(width: 10.0,),
-                                Text("Prof. Anooja Joy"),
+                                Text("${Prof}"),
                               ],
                             ),
                           ),
@@ -155,7 +156,9 @@ class _ShowMeetingState extends State<ShowMeeting> {
               child: ListView.builder(
                 itemCount: meet.docs.length,
                 itemBuilder: (context, index) {
-                  return _buildListItem(Subject: meet.docs[index].get('Subject'),
+                  return _buildListItem(
+                    Subject: meet.docs[index].get('Subject'),
+                    Prof: meet.docs[index].get('Professor'),
                       Date: meet.docs[index].get('Date'),
                     Time: meet.docs[index].get('Time').substring(10,meet.docs[index].get('Time').length -1),
                     Title: meet.docs[index].get('Title'),
