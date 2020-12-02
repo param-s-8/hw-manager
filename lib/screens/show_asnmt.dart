@@ -38,7 +38,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
 //    .orderBy('Subject');
   }
 
-  Widget _buildListItem({String Subject, String Date, String Time, String Title, String Index, Item}){
+  Widget _buildListItem({String Subject, String Prof, String Date, String Time, String Title, String Index}){
     return Dismissible(
       key: Key(Index),
       onDismissed: (direction){
@@ -66,18 +66,23 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
               Container(
                 height: 150.0,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text("Date: ${Date}"),
-                        SizedBox(width: 100.0,),
-                        Text("Time: ${Time}"),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,2.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text("Date: ${Date}"),
+                          SizedBox(width: 120.0,),
+                          Text("Time: ${Time}"),
+                        ],
+                      ),
                     ),
                     SizedBox(height: 10.0,),
-                    Padding(padding:EdgeInsets.symmetric(horizontal: 20.0) ,
+                    Padding(padding:EdgeInsets.only(left: 20.0) ,
                       child: Container(
                         height: 1.0,
                         width: 304.0,
@@ -86,10 +91,10 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                     ),
                     SizedBox(height: 15.00,),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
+                      padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+
                         children: <Widget>[
                           Icon(Icons.book),
                           SizedBox(width: 10.0,),
@@ -98,7 +103,7 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
+                      padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,14 +115,14 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,20.0,10.0),
+                      padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Icon(Icons.person),
                           SizedBox(width: 10.0,),
-                          Text("Anooja"),
+                          Text("${Prof}"),
                         ],
                       ),
                     ),
@@ -151,11 +156,11 @@ class _ShowAsnmtState extends State<ShowAsnmt> {
                 itemBuilder: (context, index) {
                   return _buildListItem(
                     Subject: ast.docs[index].get('Subject'),
+                    Prof: ast.docs[index].get('Professor'),
                     Date: ast.docs[index].get('Date'),
                     Time: ast.docs[index].get('Time').substring(10,ast.docs[index].get('Time').length -1),
                     Title: ast.docs[index].get('Title'),
                     Index: ast.docs[index].id,
-                    Item: ast.docs,
                   );
                 },),
             ),

@@ -110,4 +110,7 @@ class crudMethods {
   deleteA(docId) {
     return FirebaseFirestore.instance.collection('assignment').doc(docId).delete().catchError((e) => print(e));
   }
+  deleteM(docId) {
+    return FirebaseFirestore.instance.collection('meeting').doc(docId).delete().catchError((e) => print(e));
+  }
 }

@@ -52,15 +52,17 @@ class _ShowSubState extends State<ShowSub> {
           ),
 
           // width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 10.0),
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
                 height: 150.0,
 
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
 
                     SizedBox(height: 20.0,),
@@ -73,9 +75,9 @@ class _ShowSubState extends State<ShowSub> {
                     ),
                     SizedBox(height: 20.00,),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,10.0,10.0),
+                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,0.0,10.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(Icons.subject),
                           SizedBox(width: 10.0,),
@@ -86,9 +88,9 @@ class _ShowSubState extends State<ShowSub> {
                     ),
                     SizedBox(height: 20.00,),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,10.0,10.0),
+                      padding: const EdgeInsets.fromLTRB(0.0,0.0 ,0.0,10.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(Icons.account_box,size: 25,),
                           SizedBox(width: 10.0,),

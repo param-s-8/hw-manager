@@ -49,6 +49,11 @@ class MainDrawer extends StatelessWidget {
             onTap: () => _pushPage(context, ProfilePage()),
           ),
           ListTile(
+            leading: Icon(Icons.hourglass_empty,color: Colors.black,),
+            title: Text('Home Page',style: TextStyle(color: Colors.black,),),
+            onTap: () => _pushPage(context, ShowList()),
+          ),
+          ListTile(
             leading: Icon(Icons.add,color: Colors.black,),
             title: Text('Add a meeting',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context, AddMeet()),
@@ -68,11 +73,7 @@ class MainDrawer extends StatelessWidget {
             title: Text('View all Subjects',style: TextStyle(color: Colors.black,),),
             onTap: () => _pushPage(context,ShowSub()),
           ),
-          ListTile(
-            leading: Icon(Icons.hourglass_empty,color: Colors.black,),
-            title: Text('Pending Tasks',style: TextStyle(color: Colors.black,),),
-            onTap: () => _pushPage(context, HomePage()),
-          ),
+
           ListTile(
             leading: Icon(Icons.arrow_back,color: Colors.black,),
             title: Text('Logout',style: TextStyle(color: Colors.black,),),

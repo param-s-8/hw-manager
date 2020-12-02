@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hw_manager/screens/showlist.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -20,7 +21,8 @@ class  AddAsnmtState extends State <AddAsnmt> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime _dateTime;
-  String _subjVal, _formattedDT;
+  int _subjVal;
+  String _formattedDT;
   TimeOfDay _time , picked;
   final TextEditingController _titleController = TextEditingController();
 
@@ -138,7 +140,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
                                 },
                                 items: sub.map((element) {
                                   return DropdownMenuItem(
-                                    value: element["Subject"],
+                                    value: sub.indexOf(element),
                                     child: Text(element["Subject"],
                                       style: TextStyle(
                                         color: Colors.grey[700],
@@ -262,7 +264,8 @@ class  AddAsnmtState extends State <AddAsnmt> {
         'UID': _auth.currentUser.uid,
         'Title': _titleController.text,
         'Date': _formattedDT,
-        'Subject': _subjVal,
+        'Subject': sub.elementAt(_subjVal).get("Subject"),
+        'Professor': sub.elementAt(_subjVal).get("Professor"),
         'Time' : _time.toString()
       }).then((result) {
         print("Assignment Added");
@@ -270,7 +273,7 @@ class  AddAsnmtState extends State <AddAsnmt> {
         print("Error: $e");
       });
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-        return HomePage();
+        return ShowList();
       }));
     } catch (e) {
       Scaffold.of(context).showSnackBar(SnackBar(

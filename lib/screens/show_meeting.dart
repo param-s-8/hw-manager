@@ -39,87 +39,102 @@ class _ShowMeetingState extends State<ShowMeeting> {
 //    .orderBy('Subject');
   }
 
-  Widget _buildListItem({String Subject, String Date, String Time, String Title}){
-    return Card(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.deepOrange),
+  Widget _buildListItem({String Subject, String Date, String Time, String Title, String Index}){
+    return Dismissible(
+      key: Key(Index),
+      onDismissed: (direction){
+        crudObj.deleteM(Index);
+      },
+      background: Container(
+        color: Colors.red,
+      ),
+      child: Card(
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 25.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    height: 150.0,
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text("Date: ${Date}"),
-                            SizedBox(width: 120.0,),
-                            Text("Time: ${Time}"),
-                          ],
-                        ),
-                        SizedBox(height: 10.0,),
-                        Padding(padding:EdgeInsets.symmetric(horizontal: 2.0) ,
-                          child: Container(
-                            height: 1.0,
-                            width: 340.0,
-                            color: Colors.black,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.deepOrange),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(vertical: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      height: 150.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,2.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text("Date: ${Date}"),
+                                SizedBox(width: 120.0,),
+                                Text("Time: ${Time}"),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 15.00,),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0.0,0.0 ,200.0,10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(Icons.book),
-                              SizedBox(width: 10.0,),
+                          SizedBox(height: 10.0,),
+                          Padding(
+                            padding:EdgeInsets.only(left: 20.0) ,
+                            child: Container(
+                              height: 1.0,
+                              width: 304.0,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(height: 15.00,),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Icon(Icons.book),
+                                SizedBox(width: 10.0,),
 
-                              Text("${Subject}"),
-                            ],
+                                Text("${Subject}"),
+                              ],
+                            ),
                           ),
-                        ),
 
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0.0,0.0 ,212.0,10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(Icons.home),
-                              SizedBox(width: 10.0,),
-                              Text("${Title}"),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Icon(Icons.home),
+                                SizedBox(width: 10.0,),
+                                Text("${Title}"),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0.0,0.0 ,200.0,10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(Icons.person),
-                              SizedBox(width: 10.0,),
-                              Text("Prof. Anooja Joy"),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20.0,0.0 ,0.0,10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Icon(Icons.person),
+                                SizedBox(width: 10.0,),
+                                Text("Prof. Anooja Joy"),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          );
+    );
   }
 
 
@@ -144,6 +159,7 @@ class _ShowMeetingState extends State<ShowMeeting> {
                       Date: meet.docs[index].get('Date'),
                     Time: meet.docs[index].get('Time').substring(10,meet.docs[index].get('Time').length -1),
                     Title: meet.docs[index].get('Title'),
+                    Index: meet.docs[index].id,
                   );
                 },),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hw_manager/screens/showlist.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,7 +23,8 @@ class _AddMeetState extends State<AddMeet> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   DateTime _dateTime;
-  String _subjVal, _formattedDT;
+  String _formattedDT;
+  int _subjVal;
   final TextEditingController _titleController = TextEditingController();
   TimeOfDay _time , picked;
   double _boxh = 20;
@@ -140,7 +142,7 @@ Future<Null> selectTime(BuildContext context) async{
                                 },
                                 items: sub.map((element) {
                                   return DropdownMenuItem(
-                                    value: element["Subject"],
+                                    value: sub.indexOf(element),
                                     child: Text(element["Subject"],
                                       style: TextStyle(
                                         color: Colors.grey[700],
@@ -255,7 +257,8 @@ void _addMeeting() async {
       'UID': _auth.currentUser.uid,
       'Title': _titleController.text,
       'Date': _formattedDT,
-      'Subject': _subjVal,
+      'Subject': sub.elementAt(_subjVal).get("Subject"),
+      'Professor': sub.elementAt(_subjVal).get("Professor"),
       'Time' : _time.toString()
     }).then((result) {
       print("Meeting Added");
@@ -263,7 +266,7 @@ void _addMeeting() async {
       print("Error: $e");
     });
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-      return HomePage();
+      return ShowList();
     }));
   } catch (e) {
     Scaffold.of(context).showSnackBar(SnackBar(

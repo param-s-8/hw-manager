@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hw_manager/screens/home.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hw_manager/screens/showlist.dart';
 import '../crud.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -312,7 +313,7 @@ void _update() async {
     });
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => HomePage()));
+        builder: (context) => ShowList()));
   }
 }
 class HeaderCurvedContainer extends CustomPainter{
