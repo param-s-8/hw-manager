@@ -33,10 +33,6 @@ class _ShowMeetingState extends State<ShowMeeting> {
       });
     });
     super.initState();
-//    _ref = FirebaseFirestore.instance
-//    .collection('subject')
-//    .where('UID',isEqualTo: _auth.currentUser.uid.toString())
-//    .orderBy('Subject');
   }
 
   Widget _buildListItem({String Subject, String Prof, String Date, String Time, String Title, String Index}){
@@ -111,7 +107,7 @@ class _ShowMeetingState extends State<ShowMeeting> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                Icon(Icons.home),
+                                Icon(Icons.title),
                                 SizedBox(width: 10.0,),
                                 Text("${Title}"),
                               ],

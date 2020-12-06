@@ -31,10 +31,7 @@ class _ShowListState extends State<ShowList> with SingleTickerProviderStateMixin
         sub = results;
       });
     });
-//    _ref = FirebaseFirestore.instance
-//    .collection('subject')
-//    .where('UID',isEqualTo: _auth.currentUser.uid.toString())
-//    .orderBy('Subject');
+
   }
 
   @override

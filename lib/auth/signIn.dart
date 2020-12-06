@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'package:hw_manager/screens/showlist.dart';
-import '../screens/home.dart';
+
 
 class SignIn extends StatefulWidget {
   @override
@@ -190,10 +190,10 @@ class _SignInState extends State<SignIn> {
                                   ),
                                 ),
                                 Container(
-                                  alignment: Alignment.centerRight,
+                                  //alignment: Alignment,
                                   child: FlatButton(
                                     onPressed: () => print("Forgot Password!"),
-                                    padding: EdgeInsets.only(right:0),
+                                    padding: EdgeInsets.only(left:250),
                                     child: Text(
                                       'Forgot Password?',
                                       style: TextStyle(

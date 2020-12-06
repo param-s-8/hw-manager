@@ -59,12 +59,10 @@ class _ShowSubState extends State<ShowSub> {
             children: <Widget>[
               Container(
                 height: 150.0,
-
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-
                     SizedBox(height: 20.0,),
                     Padding(padding:EdgeInsets.symmetric(horizontal: 30.0) ,
                       child: Container(
@@ -81,7 +79,6 @@ class _ShowSubState extends State<ShowSub> {
                         children: <Widget>[
                           Icon(Icons.subject),
                           SizedBox(width: 10.0,),
-
                           Text(subject["Subject"], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                         ],
                       ),

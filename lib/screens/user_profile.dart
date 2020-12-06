@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hw_manager/screens/home.dart';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hw_manager/screens/showlist.dart';
 import '../crud.dart';
@@ -80,11 +80,6 @@ class _ProfilePageState extends State<ProfilePage> {
   {
     if(user!=null) {
         return Material(
-            //elevation: 4,
-            //shadowColor: Colors.grey,
-            /*shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10,),
-            ),*/
             child: Form(
               key: _formKey,
               child: Column(

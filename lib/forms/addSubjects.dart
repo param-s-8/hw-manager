@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hw_manager/screens/showlist.dart';
-import '../screens/home.dart';
+
 import '../crud.dart';
 
 class addSubject extends StatefulWidget {

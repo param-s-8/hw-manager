@@ -4,9 +4,7 @@ import 'package:hw_manager/screens/showlist.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import '../crud.dart';
-import '../screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddAsnmt extends StatefulWidget {
@@ -41,14 +39,11 @@ class  AddAsnmtState extends State <AddAsnmt> {
         
       });
       print("Subject: ${sub[0].get("Subject")}");
-
     });
-
   }
 
   Future<Null> selectTime(BuildContext context) async{
     picked = await showTimePicker(context: context, initialTime: _time,);
-
     if(picked!=null){
       setState(() {
         _time = picked;
