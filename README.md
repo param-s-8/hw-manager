@@ -1,4 +1,4 @@
-# hw_manager
+# HomeWork Manager
 
 Manage your homework and meetings efficiently.
 
