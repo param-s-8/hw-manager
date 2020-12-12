@@ -2,15 +2,11 @@
 
 Manage your homework and meetings efficiently.
 
-## Getting Started
+## Screenshots of the App:
+  LOGIN             |   HOME-PAGE | PROFILE PAGE
+:-------------------------:|:-------------------------:|:---------------------:
+![](https://user-images.githubusercontent.com/59571953/101987560-c1ec3b00-3cba-11eb-9265-3c92376787b4.png)|![](https://user-images.githubusercontent.com/59571953/101987727-f44a6800-3cbb-11eb-8c75-b85aa1c60145.png)|![](https://user-images.githubusercontent.com/59571953/101987733-ff04fd00-3cbb-11eb-8632-6ee5f163c169.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ADD ASSIGNMENT           |   DRAWER | SPEED-DIAL
+:-------------------------:|:-------------------------:|:---------------------:
+![](https://user-images.githubusercontent.com/59571953/101987779-2e1b6e80-3cbc-11eb-8fbf-5f4993455263.png)|![](https://user-images.githubusercontent.com/59571953/101987780-2fe53200-3cbc-11eb-9b25-ba7c7578484b.png)|![](https://user-images.githubusercontent.com/59571953/101987781-31aef580-3cbc-11eb-8cae-6cb099093cd3.png)
